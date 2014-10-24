@@ -1,0 +1,24 @@
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM_TranslationTable.exe.config
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\rs485_com.dll
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM_TranslationTable.exe
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM_TranslationTable.pdb
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\Command.dll
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\CommandsPD4I.dll
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.csprojResolveAssemblyReference.cache
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.IQM_TranslationTable.resources
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.Properties.Resources.resources
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.csproj.GenerateResource.Cache
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.exe
+C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.pdb
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM_TranslationTable.exe.config
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.exe
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.pdb
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\rs485_com.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM_TranslationTable.exe
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM_TranslationTable.pdb
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\Command.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\CommandsPD4I.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.csprojResolveAssemblyReference.cache
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.IQM_TranslationTable.resources
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.Properties.Resources.resources
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.csproj.GenerateResource.Cache
