@@ -102,6 +102,7 @@ namespace IQM_TranslationTable
             this.label20 = new System.Windows.Forms.Label();
             this.motor1StatusLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.motorSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordSettings)).BeginInit();
             this.panel1.SuspendLayout();
@@ -295,6 +296,7 @@ namespace IQM_TranslationTable
             this.groupbox1.AutoSize = true;
             this.groupbox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupbox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupbox1.Controls.Add(this.button1);
             this.groupbox1.Controls.Add(this.moveEventButton);
             this.groupbox1.Controls.Add(this.baudrateDropDown);
             this.groupbox1.Controls.Add(this.comDropDown);
@@ -874,6 +876,16 @@ namespace IQM_TranslationTable
             this.label6.TabIndex = 8;
             this.label6.Text = "Motor1 Status:";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(649, 42);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Test iCOM";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // IQM_TranslationTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -988,6 +1000,7 @@ namespace IQM_TranslationTable
         private Button motor2LeftButton;
         private Button motor1RefPositionButton;
         private Button moveEventButton;
+        private Button button1;
     }
 }
 

@@ -22,3 +22,7 @@ C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_Translatio
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.IQM_TranslationTable.resources
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.Properties.Resources.resources
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.csproj.GenerateResource.Cache
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM.Common.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM.Elekta.ICom.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM.Elekta.IComInterface.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.iCOMTest.resources

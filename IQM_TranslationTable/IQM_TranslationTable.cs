@@ -291,5 +291,11 @@ namespace IQM_TranslationTable
         {
             _move.Set();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            iCOMTest logTest = new iCOMTest();
+            logTest.Show();
+        }
     }
 }
