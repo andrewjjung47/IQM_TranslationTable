@@ -26,3 +26,9 @@ C:\Users\Andrew Jongho Jung\Documents\Visual Studio 2013\Projects\IQM_Translatio
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM.Elekta.ICom.dll
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\IQM.Elekta.IComInterface.dll
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\Release\IQM_TranslationTable.iCOMTest.resources
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\iCOMClient.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\mfc42.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\mfc42u.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\msvcirt.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\msvcp60.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\Release\msvcrt.dll
