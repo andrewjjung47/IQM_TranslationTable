@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-using Command;
-using CommandsPD4I;
+using Commands;
 
 namespace IQM_TranslationTable
 {

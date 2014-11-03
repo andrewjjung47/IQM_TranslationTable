@@ -20,11 +20,13 @@ namespace IQM_TranslationTable
     {
         private IComVxListener icom;
         private IComMonitor monitor;
+        private IQM_TranslationTable form;
 
-        public iCOMTest()
+        public iCOMTest(IQM_TranslationTable form)
         {
             InitializeComponent();
             monitor = new IComMonitor();
+            this.form = form;
         }
 
         private void Connect()
@@ -68,7 +70,8 @@ namespace IQM_TranslationTable
                 {
                     if (data.State == 10)
                     {
-                        _waitHandle.Set();
+                        //_waitHandle.Set();
+                        form.moveEvent();
                     }
                     Show(data);
                 }

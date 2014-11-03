@@ -73,13 +73,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Command, Version=1.60.1.7, Culture=neutral, PublicKeyToken=ef6d05e3b918ae39, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Command.dll</HintPath>
-    </Reference>
-    <Reference Include="CommandsPD4I, Version=1.60.1.7, Culture=neutral, PublicKeyToken=e58b8546659a79ce, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CommandsPD4I.dll</HintPath>
+    <Reference Include="Commands">
+      <HintPath>.\Commands.dll</HintPath>
     </Reference>
     <Reference Include="IQM.Common">
       <HintPath>..\IQM.Common.dll</HintPath>
@@ -168,9 +163,6 @@
     </Content>
     <Content Include="msvcrt.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="rs485_com.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,8 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Command;
-using CommandsPD4I;
+using Commands;
 
 namespace IQM_TranslationTable
 {
@@ -63,7 +62,7 @@ namespace IQM_TranslationTable
                     baudrateDropDown.Enabled = false;
                     motorSettings.DefaultCellStyle.BackColor = SystemColors.Control;
 
-                    reportError();
+                    //reportError();
                 }
                 catch (NullReferenceException)
                 {
@@ -111,7 +110,7 @@ namespace IQM_TranslationTable
                     recordSettings.ReadOnly = true;
                     recordSettings.DefaultCellStyle.BackColor = SystemColors.Control;
                     
-                    reportError();
+                    //reportError();
                 }
                 catch (NullReferenceException)
                 {
@@ -153,7 +152,7 @@ namespace IQM_TranslationTable
             CSM.motor2.StopTravelProfile();
         }
 
-        private void reportError()
+        /*private void reportError()
         {
             if (CSM.motor1.ErrorFlag)
             {
@@ -171,7 +170,7 @@ namespace IQM_TranslationTable
             {
                 Status2TextBox.Text = " OK";
             }
-        }
+        }*/
 
         private void motor1LeftButton_Click(object sender, EventArgs e)
         {
@@ -286,15 +285,25 @@ namespace IQM_TranslationTable
         }
 
         public EventWaitHandle _move = new AutoResetEvent(false);
+        public bool inputFlag = true;
+
+        public void moveEvent()
+        {
+            if (inputFlag)
+            {
+                inputFlag = false;
+                _move.Set();
+            }
+        }
 
         private void moveEventButton_Click(object sender, EventArgs e)
         {
-            _move.Set();
+            moveEvent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            iCOMTest logTest = new iCOMTest();
+            iCOMTest logTest = new iCOMTest(this);
             logTest.Show();
         }
     }

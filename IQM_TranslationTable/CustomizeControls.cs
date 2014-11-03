@@ -43,8 +43,8 @@ namespace IQM_TranslationTable
                 motor2Record.Add(key, -1);
             }
 
-            dynamic[] Motor1Values = { 0, 20, 4, 0, 62, 62, 3, 10 };
-            dynamic[] Motor2Values = { 0, 20, 4, 0, 62, 62, 2, 10 };
+            dynamic[] Motor1Values = { 0, 10, 2, 0, 62, 62, 3, 10 };
+            dynamic[] Motor2Values = { 0, 10, 2, 0, 62, 62, 2, 10 };
             recordSettings.InitializeDataGridView(HeaderNames, Motor1Values, Motor2Values);
         }
 

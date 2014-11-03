@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Command;
-using CommandsPD4I;
+using Commands;
 
 namespace IQM_TranslationTable
 {
@@ -217,6 +216,8 @@ namespace IQM_TranslationTable
             ui.UpdatePositions();
             ui.UpdateStatus("paused");
             Thread.Sleep(500); // gives 1000ms break between movements
+
+            form.inputFlag = true;
         }
 
         public void SetHoming()
@@ -258,14 +259,14 @@ namespace IQM_TranslationTable
 
             if (Referenced) // Previously referenced and current position is known
             {
-                if (QueryCurrentPosition() > 3200)
+                if (QueryCurrentPosition() > 1600)
                 {
                     SetPositionType(1); // Relative positioning mode
 
-                    SetMaxFrequency(2000); // in Hz
-                    SetStartFrequency(1000);
+                    SetMaxFrequency(1600); // in Hz
+                    SetStartFrequency(200);
 
-                    SetSteps(CurrentPosition - 3200); // travel most of the distance in fast speed
+                    SetSteps(CurrentPosition - 1600); // travel most of the distance in fast speed
 
                     StartTravelProfile(); // start the fast relative position run
 
@@ -283,8 +284,8 @@ namespace IQM_TranslationTable
             else // Has not been referenced and current position is not known
             {
                 SetPositionType(4); // external reference run
-                SetMaxFrequency(2000); // in Hz
-                SetStartFrequency(1000);
+                SetMaxFrequency(1600); // in Hz
+                SetStartFrequency(200);
 
                 StartTravelProfile(); // start the fast reference run all the way
 
@@ -292,7 +293,7 @@ namespace IQM_TranslationTable
 
                 SetDirection(0); // set motor direction to left
                 SetPositionType(1); // relative positioning mode
-                SetSteps(3200);
+                SetSteps(1600);
 
                 StartTravelProfile(); // move 1cm away from the limit switch
 
