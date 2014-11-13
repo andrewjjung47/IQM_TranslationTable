@@ -13,21 +13,26 @@ namespace IQM_TranslationTable
     {
         private UpdateUI ui;
 
+        // UI windows form.
         private IQM_TranslationTable form;
 
         delegate void PositionDelegate();
 
         delegate void StatusDelegate(string status);
 
+        // Reference position set by the user.
         public int RefPosition
         { get; set; }
 
+        // Current position relative to the RefPosition.
         public int CurrentPosition
         { get; private set; }
 
-        public bool Referenced
+        // Whether the table has been homed and aware of its position or not
+        public bool Referenced 
         { get; private set; }
 
+        // Number of repeat of a travel profile
         private int repeat;
         public int Repeat
         {
@@ -45,6 +50,7 @@ namespace IQM_TranslationTable
             }
         }
 
+        // Record number of the travel profile
         private int recordNum;
         public int RecordNum
         {
@@ -57,19 +63,23 @@ namespace IQM_TranslationTable
                 }
                 else
                 {
-                    recordNum = value; 
+                    recordNum = value;
+                    homeRecordNum = recordNum + 1;
                 }
             }
         }
 
+        // Record number of the homing profile. This is automatically set as recordNum + 1.
         private int homeRecordNum;
 
-        public MyComMotorCommands(IQM_TranslationTable form, 
-            TextBox absPosTextBox, TextBox relPosTextBox, Label statusLabel)
+        public MyComMotorCommands(IQM_TranslationTable form,
+    TextBox absPosTextBox, TextBox relPosTextBox, Label statusLabel)
         {
             this.form = form;
             ui = new UpdateUI(this, form, absPosTextBox, relPosTextBox, statusLabel);
         }
+
+        /* Customized commands */
 
         public void MySetStepMode(int stepMode)
         {
@@ -223,8 +233,6 @@ namespace IQM_TranslationTable
         public void SetHoming()
         {
             /* Initialize settings for homing. */
-
-            homeRecordNum = RecordNum + 1;
 
             // Choose homing record
             ChooseRecord(homeRecordNum);
