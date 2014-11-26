@@ -110,8 +110,8 @@ namespace IQM_TranslationTable
             motor1.SetRepeat(1);
             motor2.SetRepeat(1);
 
-            motor1.Repeat = form.UI.motor1Record["Repeat"];
-            motor2.Repeat = form.UI.motor2Record["Repeat"];
+            motor1.TravelRepeat = form.UI.motor1Record["Repeat"];
+            motor2.TravelRepeat = form.UI.motor2Record["Repeat"];
 
             // Set travel distance
             motor1.MySetSteps(form.UI.motor1Record["Position Demand"]);
@@ -132,22 +132,22 @@ namespace IQM_TranslationTable
             motor2.Home();
 
             // String array to save position data
-            string[] LogText = new string[motor1.Repeat * motor2.Repeat + 1];
+            string[] LogText = new string[motor1.TravelRepeat * motor2.TravelRepeat + 1];
             LogText[0] = "Motor2Pos Motor1Pos StartTime EndTime";
 
-            for (int i = 0; i < motor2.Repeat; i++) // loop for motor2 movement
+            for (int i = 0; i < motor2.TravelRepeat; i++) // loop for motor2 movement
             {
                 String tempPos = motor2.QueryCurrentPosition().ToString(); // temporary holder for motor2 position
-                for (int j = 0; j < motor1.Repeat; j++) // loop for motor1 movement
+                for (int j = 0; j < motor1.TravelRepeat; j++) // loop for motor1 movement
                 {
                     motor1.WaitEvent();
 
                     motor1.StartTravelProfile();
                     motor1.WaitMotor();
 
-                    LogText[motor2.Repeat * i + j + 1] = tempPos + " " + motor1.GetPosition().ToString() + " " + DateTime.Now.ToString();
+                    LogText[motor2.TravelRepeat * i + j + 1] = tempPos + " " + motor1.GetPosition().ToString() + " " + DateTime.Now.ToString();
                     Thread.Sleep(1000);
-                    LogText[motor1.Repeat * i + j + 1] += " " + DateTime.Now.ToString();
+                    LogText[motor1.TravelRepeat * i + j + 1] += " " + DateTime.Now.ToString();
                 }
                 motor2.WaitEvent();
 
@@ -166,6 +166,35 @@ namespace IQM_TranslationTable
             {
                 System.IO.File.WriteAllLines(@logDirectory, LogText);
             }
+        }
+        public void ManualHome()
+        {
+            Home();
+            StatusEnd();
+        }
+
+        public void ManualMove(int steps, int speed, int direction)
+        {
+            ChooseRecord(RecordNum);
+
+            SetMaxFrequency(speed);
+            SetSteps(steps);
+            SetDirection(direction);
+
+            StartTravelProfile();
+            WaitMotor();
+
+            ChooseRecord(RecordNum);
+
+            ui.UpdatePositions();
+            StatusEnd();
+        }
+
+
+
+        public void WaitEvent()
+        {
+            form._move.WaitOne();
         }
     }
 }
