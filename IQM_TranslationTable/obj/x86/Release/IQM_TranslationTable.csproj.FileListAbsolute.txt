@@ -18,3 +18,4 @@
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.exe
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.pdb
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\Commands.dll
+\\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.CommandLine.resources

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -21,6 +23,8 @@ namespace IQM_TranslationTable
         private IComVxListener icom;
         private IComMonitor monitor;
         private IQM_TranslationTable form;
+        private ObservableCollection<short> stateQueue;
+        private event EventHandler MoveTable;
 
         public iCOMTest(IQM_TranslationTable form)
         {
@@ -29,8 +33,28 @@ namespace IQM_TranslationTable
             this.form = form;
         }
 
+        private void HandleChange(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (stateQueue[stateQueue.Count - 1] == 5)
+            {
+                int indexStart = stateQueue.IndexOf(4);
+                int indexIrradiate = stateQueue.IndexOf(5);
+                int indexTerminate = stateQueue.IndexOf(9);
+
+                if (indexStart < indexIrradiate &&
+                    indexIrradiate < indexTerminate &&
+                    indexTerminate < stateQueue.Count - 1)
+                {
+                    form.moveEvent();
+                }
+            }
+        }
+
         private void Connect()
         {
+            stateQueue = new ObservableCollection<short>();
+            stateQueue.CollectionChanged += HandleChange;
+
             string ip = textBox2.Text.Trim();
 
             icom = new IComVxListener(null);
@@ -68,10 +92,16 @@ namespace IQM_TranslationTable
             {
                 try
                 {
-                    if (data.State == 10)
+                    if (stateQueue.Count != 0)
                     {
-                        //_waitHandle.Set();
-                        form.moveEvent();
+                        if (stateQueue[stateQueue.Count - 1] != data.State)
+                        {
+                            stateQueue.Add(data.State);
+                        }
+                    }
+                    else
+                    {
+                        stateQueue.Add(data.State);
                     }
                     Show(data);
                 }
@@ -85,7 +115,6 @@ namespace IQM_TranslationTable
 
         private void Show(IComData data)
         {
-
             if (recorder != null)
             {
                 data.Save(recorder);

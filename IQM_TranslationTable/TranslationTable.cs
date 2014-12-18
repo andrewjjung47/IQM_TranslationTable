@@ -10,18 +10,20 @@ namespace IQM_TranslationTable
 {
     public class TranslationTable
     {
-        public MyComMotorCommands motor1;
-        public MyComMotorCommands motor2;
+        public TransTableMotor motor1;
+        public TransTableMotor motor2;
         private IQM_TranslationTable form;
 
         public static string logDirectory;
 
+        // Used when all the movements are completed
+        public event EventHandler Motor1ProfileEnded;
+        public event EventHandler Motor2ProfileEnded;
+
         public TranslationTable(IQM_TranslationTable form)
         {
-            motor1 = new MyComMotorCommands(form, form.Motor1AbsPosTextBox, form.Motor1RelPosTextBox, 
-                form.Motor1StatusLabel);
-            motor2 = new MyComMotorCommands(form, form.Motor2AbsPosTextBox, form.Motor2RelPosTextBox,
-                form.Motor2StatusLabel);
+            motor1 = new TransTableMotor();
+            motor2 = new TransTableMotor();
 
             // Set motor address
             motor1.MotorAddresse = 1;
@@ -41,12 +43,11 @@ namespace IQM_TranslationTable
             motor2.Baudrate = Convert.ToInt32(form.BaudrateDropDown.SelectedItem.ToString());
 
             // Read motor settings from datagrid
-            form.UI.ReadMotor1Settings();
-            form.UI.ReadMotor2Settings();
+            form.UI.ReadMotorSettings();
 
             // Set step mode
-            motor1.MySetStepMode(form.UI.motor1Settings["Step Mode"]);
-            motor2.MySetStepMode(form.UI.motor2Settings["Step Mode"]);
+            motor1.SetStepMode(form.UI.motor1Settings["StepMode"]);
+            motor2.SetStepMode(form.UI.motor2Settings["StepMode"]);
 
             // Set phase current
             motor1.SetPhaseCurrent(form.UI.motor1Settings["PhaseCurrent"]);
@@ -67,8 +68,8 @@ namespace IQM_TranslationTable
 
         public void LoadRecord()
         {
-            motor1.RecordNum = Convert.ToInt32(form.RecordNumTextBox.Text);
-            motor2.RecordNum = Convert.ToInt32(form.RecordNumTextBox.Text); 
+            motor1.RecordNum = Convert.ToInt32(form.RecordNumDropDown.SelectedItem.ToString());
+            motor2.RecordNum = Convert.ToInt32(form.RecordNumDropDown.SelectedItem.ToString()); 
 
             // Load run record
             motor1.ChooseRecord(motor1.RecordNum);
@@ -79,32 +80,31 @@ namespace IQM_TranslationTable
             motor2.SetPositionType(1);
 
             // Read record settings from datagrid
-            form.UI.ReadMotor1Record();
-            form.UI.ReadMotor2Record();
+            form.UI.ReadMotorRecord();
 
             // Set motor direction
             motor1.SetDirection(form.UI.motor1Record["Direction"]);
             motor2.SetDirection(form.UI.motor2Record["Direction"]);
 
             // Set maximum speed in Hz
-            motor1.MySetMaxFrequency(form.UI.motor1Record["Maximum Speed"]);
-            motor2.MySetMaxFrequency(form.UI.motor2Record["Maximum Speed"]);
+            motor1.SetMaxFrequency(form.UI.motor1Record["MaximumSpeed"]);
+            motor2.SetMaxFrequency(form.UI.motor2Record["MaximumSpeed"]);
 
             // Set minimum speed in Hz
-            motor1.MySetStartFrequency(form.UI.motor1Record["Minimum Speed"]);
-            motor2.MySetStartFrequency(form.UI.motor2Record["Minimum Speed"]);
+            motor1.SetStartFrequency(form.UI.motor1Record["MinimumSpeed"]);
+            motor2.SetStartFrequency(form.UI.motor2Record["MinimumSpeed"]);
 
             // Set the ramp type
-            motor1.SetRampType(form.UI.motor1Record["Ramp Type"]);
-            motor2.SetRampType(form.UI.motor2Record["Ramp Type"]);
+            motor1.SetRampType(form.UI.motor1Record["RampType"]);
+            motor2.SetRampType(form.UI.motor2Record["RampType"]);
 
             // Set ramp acceleration in Hz/ms
-            motor1.MySetRamp(form.UI.motor1Record["Acceleration"]);
-            motor2.MySetRamp(form.UI.motor2Record["Acceleration"]);
+            motor1.SetRamp(form.UI.motor1Record["Acceleration"]);
+            motor2.SetRamp(form.UI.motor2Record["Acceleration"]);
 
             // Set brake deceleration in Hz/ms
-            motor1.MySetBrakeRamp(form.UI.motor1Record["Brake"]);
-            motor2.MySetBrakeRamp(form.UI.motor2Record["Brake"]);
+            motor1.SetBrakeRamp(form.UI.motor1Record["Brake"]);
+            motor2.SetBrakeRamp(form.UI.motor2Record["Brake"]);
 
             // Set repeat
             motor1.SetRepeat(1);
@@ -114,8 +114,8 @@ namespace IQM_TranslationTable
             motor2.TravelRepeat = form.UI.motor2Record["Repeat"];
 
             // Set travel distance
-            motor1.MySetSteps(form.UI.motor1Record["Position Demand"]);
-            motor2.MySetSteps(form.UI.motor2Record["Position Demand"]);
+            motor1.SetSteps(form.UI.motor1Record["PositionDemand"]);
+            motor2.SetSteps(form.UI.motor2Record["PositionDemand"]);
 
             // Set record number to use for CSM runs
             motor1.SetRecord(motor1.RecordNum);
@@ -137,19 +137,22 @@ namespace IQM_TranslationTable
 
             for (int i = 0; i < motor2.TravelRepeat; i++) // loop for motor2 movement
             {
-                String tempPos = motor2.QueryCurrentPosition().ToString(); // temporary holder for motor2 position
+                String tempPos = motor2.CurrentRelPosition.ToString(); // temporary holder for motor2 position
                 for (int j = 0; j < motor1.TravelRepeat; j++) // loop for motor1 movement
                 {
-                    motor1.WaitEvent();
+                    WaitEvent();
 
                     motor1.StartTravelProfile();
                     motor1.WaitMotor();
 
-                    LogText[motor2.TravelRepeat * i + j + 1] = tempPos + " " + motor1.GetPosition().ToString() + " " + DateTime.Now.ToString();
+                    LogText[motor2.TravelRepeat * i + j + 1] = tempPos + " " + motor1.CurrentRelPosition.ToString() + " " + DateTime.Now.ToString();
                     Thread.Sleep(1000);
                     LogText[motor1.TravelRepeat * i + j + 1] += " " + DateTime.Now.ToString();
+
+                    form.inputFlag = true;
                 }
-                motor2.WaitEvent();
+
+                WaitEvent();
 
                 motor2.StartTravelProfile();
                 motor2.WaitMotor();
@@ -159,38 +162,83 @@ namespace IQM_TranslationTable
 
             motor2.Home();
 
-            motor1.StatusEnd();
-            motor2.StatusEnd();
+            OnMotor1ProfileEnded(EventArgs.Empty);
+            OnMotor2ProfileEnded(EventArgs.Empty);
 
             if (logDirectory != null)
             {
                 System.IO.File.WriteAllLines(@logDirectory, LogText);
             }
         }
-        public void ManualHome()
+        public void ManualHome(int motorNumber)
         {
-            Home();
-            StatusEnd();
+            // The argument motorNumber is used to specify motor1 or motor2
+
+            if (motorNumber == 1)
+            {
+                motor1.Home();
+                OnMotor1ProfileEnded(EventArgs.Empty);
+            }
+            else if(motorNumber == 2)
+            {
+                motor2.Home();
+                OnMotor2ProfileEnded(EventArgs.Empty);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("motorNumber must be either 1 or 2");
+            }
         }
 
-        public void ManualMove(int steps, int speed, int direction)
+        public void ManualMove(int steps, int speed, int direction, int motorNumber)
         {
-            ChooseRecord(RecordNum);
+            // The argument motorNumber is used to specify motor1 or motor2
 
-            SetMaxFrequency(speed);
-            SetSteps(steps);
-            SetDirection(direction);
+            TransTableMotor selectedMotor;
 
-            StartTravelProfile();
-            WaitMotor();
+            if (motorNumber == 1)
+            {
+                selectedMotor = motor1;
+            }
+            else if (motorNumber == 2)
+            {
+                selectedMotor = motor2;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("motorNumber must be either 1 or 2");
+            }
 
-            ChooseRecord(RecordNum);
+            selectedMotor.ChooseRecord(selectedMotor.RecordNum);
 
-            ui.UpdatePositions();
-            StatusEnd();
+            selectedMotor.SetMaxFrequency(speed);
+            selectedMotor.SetSteps(steps);
+            selectedMotor.SetDirection(direction);
+
+            selectedMotor.StartTravelProfile();
+            selectedMotor.WaitMotor();
+
+            selectedMotor.ChooseRecord(selectedMotor.RecordNum); // to revert the record back to RecordNum
+
+            if (motorNumber == 1)
+            {
+                OnMotor1ProfileEnded(EventArgs.Empty);
+            }
+            else
+            {
+                OnMotor2ProfileEnded(EventArgs.Empty);
+            }
         }
 
+        protected virtual void OnMotor1ProfileEnded(EventArgs e)
+        {
+            if (Motor1ProfileEnded != null) Motor1ProfileEnded(this, e);
+        }
 
+        protected virtual void OnMotor2ProfileEnded(EventArgs e)
+        {
+            if (Motor2ProfileEnded != null) Motor2ProfileEnded(this, e);
+        }
 
         public void WaitEvent()
         {

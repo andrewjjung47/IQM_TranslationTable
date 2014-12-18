@@ -118,11 +118,11 @@ namespace IQM_TranslationTable
 
             while (GetStatusByte() % 2 == 0)
             {
-                OnMotorMoving(new MotorStatusEventArg(QueryCurrentAbsPosition()));
+                OnMotorMoving(new MotorStatusEventArg(QueryCurrentAbsPosition(), CurrentRelPosition));
                 Thread.Sleep(50);
             }
 
-            OnMotorStopped(new MotorStatusEventArg(QueryCurrentAbsPosition()));
+            OnMotorStopped(new MotorStatusEventArg(QueryCurrentAbsPosition(), CurrentRelPosition));
             Thread.Sleep(500); // gives 1000ms break between movements
         }
 
@@ -189,6 +189,18 @@ namespace IQM_TranslationTable
                 StartTravelProfile(); // start the slow reference run
 
                 WaitMotor();
+
+                if (RefPosition != 0)
+                {
+                    SetPositionType(1);
+                    SetDirection(0);
+                    SetSteps(RefPosition);
+                    SetMaxFrequency(1600 * StepMode);
+
+                    StartTravelProfile();
+
+                    WaitMotor();
+                }
             }
             else // Has not been referenced and current position is not known
             {
@@ -232,8 +244,8 @@ namespace IQM_TranslationTable
             var motorSettings = new Dictionary<string, int>();
  
             motorSettings["StepMode"] = GetStepMode();
-            motorSettings["PhaseCurrent"] = GetStepMode();
-            motorSettings["CurrentReduction"] = GetCurrentReduction();
+            motorSettings["PhaseCurrent"] = GetPhaseCurrent();
+            motorSettings["CurrentReduct"] = GetCurrentReduction();
 
             return motorSettings;
         }
@@ -243,13 +255,13 @@ namespace IQM_TranslationTable
             var recordSettings = new Dictionary<string, int>();
 
             recordSettings["Direction"] = GetDirection(RecordNum);
-            recordSettings["MaxFrequency"] = GetMaxFrequency(RecordNum);
-            recordSettings["StartFrequency"] = GetStartFrequency(RecordNum);
+            recordSettings["MaximumSpeed"] = GetMaxFrequency(RecordNum);
+            recordSettings["MinimumSpeed"] = GetStartFrequency(RecordNum);
             recordSettings["RampType"] = GetRampType(RecordNum);
-            recordSettings["Ramp"] = GetRamp(RecordNum);
-            recordSettings["BrakeRampe"] = GetBrakeRamp(RecordNum);
-            recordSettings["TravelRepeat"] = TravelRepeat;
-            recordSettings["Steps"] = GetSteps(RecordNum);
+            recordSettings["Acceleration"] = GetRamp(RecordNum);
+            recordSettings["Brake"] = GetBrakeRamp(RecordNum);
+            recordSettings["Repeat"] = TravelRepeat;
+            recordSettings["PositionDemand"] = GetSteps(RecordNum);
 
             return recordSettings;
         }
@@ -273,11 +285,13 @@ namespace IQM_TranslationTable
 
     public class MotorStatusEventArg : EventArgs
     {
-        public readonly int Position;
+        public readonly int AbsPosition;
+        public readonly int RelPosition;
 
-        public MotorStatusEventArg(int position)
+        public MotorStatusEventArg(int absPosition, int relPosition)
         {
-            Position = position;
+            AbsPosition = absPosition;
+            RelPosition = relPosition;
         }
     }
 }

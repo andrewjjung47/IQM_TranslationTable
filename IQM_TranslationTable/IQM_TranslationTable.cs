@@ -15,7 +15,7 @@ namespace IQM_TranslationTable
 {
     public partial class IQM_TranslationTable : Form
     {
-        private TranslationTable CSM;
+        public TranslationTable CSM;
         private Thread CSMThread;
         public ControlUI UI
         {
@@ -33,6 +33,15 @@ namespace IQM_TranslationTable
             CSM = new TranslationTable(this);
 
             UI = new ControlUI(this, CSM);
+
+            CSM.motor1.MotorMoving += motor1_MotorMoving;
+            CSM.motor2.MotorMoving += motor2_MotorMoving;
+
+            CSM.motor1.MotorStopped += motor1_MotorStopped;
+            CSM.motor2.MotorStopped += motor2_MotorStopped;
+
+            CSM.Motor1ProfileEnded += CSM_Motor1ProfileEnded;
+            CSM.Motor2ProfileEnded += CSM_Motor2ProfileEnded;
         }
 
         private void logDirectoryButton_Click(object sender, EventArgs e)
@@ -106,7 +115,7 @@ namespace IQM_TranslationTable
                     loadRecordButton.Text = "Change Record Settings";
                     LoadRecordButtonClick = true;
 
-                    recordNumTextBox.ReadOnly = true;
+                    recordNumDropDown.Enabled = false;
                     recordSettings.ReadOnly = true;
                     recordSettings.DefaultCellStyle.BackColor = SystemColors.Control;
                     
@@ -129,7 +138,7 @@ namespace IQM_TranslationTable
                 loadRecordButton.Text = "Load Record Settings";
                 LoadRecordButtonClick = false;
 
-                recordNumTextBox.ReadOnly = false;
+                recordNumDropDown.Enabled = true;
                 recordSettings.ReadOnly = false;
                 recordSettings.DefaultCellStyle.BackColor = SystemColors.Window;
 
@@ -146,17 +155,20 @@ namespace IQM_TranslationTable
 
         private void pauseButton_Click(object sender, EventArgs e)
         {
-            // CSMThread.Abort();
+            if (CSMThread != null)
+            {
+                CSMThread.Abort();
+            }
 
             CSM.motor1.StopTravelProfile();
             CSM.motor2.StopTravelProfile();
         }
 
-        /*private void reportError()
+        private void reportError()
         {
             if (CSM.motor1.ErrorFlag)
             {
-                Status1TextBox.Text = CSM.motor1.ErrorMessageString;
+                Status1TextBox.Text = CSM.motor1.ErrorMessage;
             }
             else
             {
@@ -164,69 +176,168 @@ namespace IQM_TranslationTable
             }
             if (CSM.motor2.ErrorFlag)
             {
-                Status2TextBox.Text = CSM.motor2.ErrorMessageString;
+                Status2TextBox.Text = CSM.motor2.ErrorMessage;
             }
             else
             {
                 Status2TextBox.Text = " OK";
             }
-        }*/
+        }
 
         private void motor1LeftButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.motor1.ManualMove(Convert.ToInt32(motor1StepsTextBox.Text),
-                Convert.ToInt32(motor1SpeedTextBox.Text),
-                0));
+            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor1StepsTextBox.Text),
+                Convert.ToInt32(motor1SpeedTextBox.Text), 0, 1));
             t.Start();
         }
 
         private void motor2LeftButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.motor2.ManualMove(Convert.ToInt32(motor2StepsTextBox.Text),
-                Convert.ToInt32(motor2SpeedTextBox.Text),
-                0));
+            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor2StepsTextBox.Text),
+                Convert.ToInt32(motor2SpeedTextBox.Text), 0, 2));
             t.Start();
         }
 
         private void motor1RightButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.motor1.ManualMove(Convert.ToInt32(motor1StepsTextBox.Text),
-                Convert.ToInt32(motor1SpeedTextBox.Text),
-                1));
+            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor1StepsTextBox.Text),
+                Convert.ToInt32(motor1SpeedTextBox.Text), 1, 1));
             t.Start();
         }
 
         private void motor2RightButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.motor2.ManualMove(Convert.ToInt32(motor2StepsTextBox.Text),
-                Convert.ToInt32(motor2SpeedTextBox.Text),
-                1));
+            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor2StepsTextBox.Text),
+                Convert.ToInt32(motor2SpeedTextBox.Text), 1, 2));
             t.Start();
         }
 
         private void motor1HomeButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(CSM.motor1.ManualHome);
+            Thread t = new Thread(() => CSM.ManualHome(1));
             t.Start();
 
         }
 
         private void motor2HomeButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(CSM.motor2.ManualHome);
+            Thread t = new Thread(() => CSM.ManualHome(2));
             t.Start();
         }
 
         private void motor1RefPositionButton_Click(object sender, EventArgs e)
         {
-            CSM.motor1.RefPosition = CSM.motor1.QueryCurrentPosition();
+            CSM.motor1.SetRefPosition();
             Motor1RelPosTextBox.Text = "0";
         }
 
         private void motor2RefPositionButton_Click(object sender, EventArgs e)
         {
-            CSM.motor2.RefPosition = CSM.motor2.QueryCurrentPosition();
+            CSM.motor2.SetRefPosition();
             Motor2RelPosTextBox.Text = "0";
+        }
+
+        delegate void MotorStatusCallBack(object sender, MotorStatusEventArg e);
+        delegate void MotorStatusEndCallBack(object sender, EventArgs e);
+
+        void motor1_MotorMoving(object sender, MotorStatusEventArg e)
+        {
+            if (this.motor1StatusLabel.InvokeRequired || this.motor1AbsPosTextBox.InvokeRequired ||
+                motor1RelPosTextBox.InvokeRequired)
+            {
+                MotorStatusCallBack d = new MotorStatusCallBack(motor1_MotorMoving);
+                this.Invoke(d, new object[] { sender, e });
+            }
+            else
+            {
+                motor1StatusLabel.Text = "Moving";
+                motor1StatusLabel.BackColor = System.Drawing.Color.LawnGreen;
+
+                motor1AbsPosTextBox.Text = e.AbsPosition.ToString();
+                motor1RelPosTextBox.Text = e.RelPosition.ToString();
+            }
+        }
+
+        void motor2_MotorMoving(object sender, MotorStatusEventArg e)
+        {
+            if (this.motor2StatusLabel.InvokeRequired || this.motor2AbsPosTextBox.InvokeRequired ||
+                motor2RelPosTextBox.InvokeRequired)
+            {
+                MotorStatusCallBack d = new MotorStatusCallBack(motor2_MotorMoving);
+                this.Invoke(d, new object[] { sender, e });
+            }
+            else
+            {
+                motor2StatusLabel.Text = "Moving";
+                motor2StatusLabel.BackColor = System.Drawing.Color.LawnGreen;
+
+                motor2AbsPosTextBox.Text = e.AbsPosition.ToString();
+                motor2RelPosTextBox.Text = e.RelPosition.ToString();
+            }
+        }
+
+        void motor1_MotorStopped(object sender, MotorStatusEventArg e)
+        {
+            if (this.motor1StatusLabel.InvokeRequired || this.motor1AbsPosTextBox.InvokeRequired ||
+                motor1RelPosTextBox.InvokeRequired)
+            {
+                MotorStatusCallBack d = new MotorStatusCallBack(motor1_MotorStopped);
+                this.Invoke(d, new object[] { sender, e });
+            }
+            else
+            {
+                motor1StatusLabel.Text = "Paused";
+                motor1StatusLabel.BackColor = System.Drawing.Color.Yellow;
+
+                motor1AbsPosTextBox.Text = e.AbsPosition.ToString();
+                motor1RelPosTextBox.Text = e.RelPosition.ToString();
+            }
+        }
+
+        void motor2_MotorStopped(object sender, MotorStatusEventArg e)
+        {
+            if (this.motor2StatusLabel.InvokeRequired || this.motor2AbsPosTextBox.InvokeRequired ||
+                motor2RelPosTextBox.InvokeRequired)
+            {
+                MotorStatusCallBack d = new MotorStatusCallBack(motor2_MotorStopped);
+                this.Invoke(d, new object[] { sender, e });
+            }
+            else
+            {
+                motor2StatusLabel.Text = "Paused";
+                motor2StatusLabel.BackColor = System.Drawing.Color.Yellow;
+
+                motor2AbsPosTextBox.Text = e.AbsPosition.ToString();
+                motor2RelPosTextBox.Text = e.RelPosition.ToString();
+            }
+        }
+
+        void CSM_Motor1ProfileEnded(object sender, EventArgs e)
+        {
+            if (this.motor1StatusLabel.InvokeRequired)
+            {
+                MotorStatusEndCallBack d = new MotorStatusEndCallBack(CSM_Motor1ProfileEnded);
+                this.Invoke(d, new object[] { sender, e });
+            }
+            else
+            {
+                motor1StatusLabel.Text = "Profile ended";
+                motor1StatusLabel.BackColor = System.Drawing.SystemColors.GrayText;
+            }
+        }
+
+        void CSM_Motor2ProfileEnded(object sender, EventArgs e)
+        {
+            if (this.motor2StatusLabel.InvokeRequired)
+            {
+                MotorStatusEndCallBack d = new MotorStatusEndCallBack(CSM_Motor2ProfileEnded);
+                this.Invoke(d, new object[] { sender, e });
+            }
+            else
+            {
+                motor2StatusLabel.Text = "Profile ended";
+                motor2StatusLabel.BackColor = System.Drawing.SystemColors.GrayText;
+            }
         }
 
         public ComboBox COMDropDown
@@ -269,9 +380,9 @@ namespace IQM_TranslationTable
             get { return motor2RelPosTextBox; }
         }
 
-        public TextBox RecordNumTextBox
+        public ComboBox RecordNumDropDown
         {
-            get { return recordNumTextBox; }
+            get { return recordNumDropDown; }
         }
 
         public Label Motor1StatusLabel
@@ -305,6 +416,12 @@ namespace IQM_TranslationTable
         {
             iCOMTest logTest = new iCOMTest(this);
             logTest.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CommandLine commandLine = new CommandLine(this);
+            commandLine.Show();
         }
     }
 }

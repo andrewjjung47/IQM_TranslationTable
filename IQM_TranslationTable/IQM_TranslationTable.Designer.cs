@@ -43,11 +43,12 @@ namespace IQM_TranslationTable
             this.label4 = new System.Windows.Forms.Label();
             this.StartButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.recordNumTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.moveEventButton = new System.Windows.Forms.Button();
             this.baudrateDropDown = new System.Windows.Forms.ComboBox();
             this.comDropDown = new System.Windows.Forms.ComboBox();
@@ -102,7 +103,7 @@ namespace IQM_TranslationTable
             this.label20 = new System.Windows.Forms.Label();
             this.motor1StatusLabel = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.recordNumDropDown = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.motorSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recordSettings)).BeginInit();
             this.panel1.SuspendLayout();
@@ -243,7 +244,7 @@ namespace IQM_TranslationTable
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.recordNumTextBox);
+            this.panel1.Controls.Add(this.recordNumDropDown);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.motorSettings);
             this.panel1.Controls.Add(this.label23);
@@ -253,14 +254,6 @@ namespace IQM_TranslationTable
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(266, 364);
             this.panel1.TabIndex = 15;
-            // 
-            // recordNumTextBox
-            // 
-            this.recordNumTextBox.Location = new System.Drawing.Point(195, 132);
-            this.recordNumTextBox.Name = "recordNumTextBox";
-            this.recordNumTextBox.Size = new System.Drawing.Size(66, 20);
-            this.recordNumTextBox.TabIndex = 10;
-            this.recordNumTextBox.Text = "1";
             // 
             // label5
             // 
@@ -296,6 +289,7 @@ namespace IQM_TranslationTable
             this.groupbox1.AutoSize = true;
             this.groupbox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupbox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupbox1.Controls.Add(this.button2);
             this.groupbox1.Controls.Add(this.button1);
             this.groupbox1.Controls.Add(this.moveEventButton);
             this.groupbox1.Controls.Add(this.baudrateDropDown);
@@ -315,6 +309,26 @@ namespace IQM_TranslationTable
             this.groupbox1.Size = new System.Drawing.Size(811, 84);
             this.groupbox1.TabIndex = 16;
             this.groupbox1.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(568, 42);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "Command";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(649, 42);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Test iCOM";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // moveEventButton
             // 
@@ -876,15 +890,14 @@ namespace IQM_TranslationTable
             this.label6.TabIndex = 8;
             this.label6.Text = "Motor1 Status:";
             // 
-            // button1
+            // recordNumDropDown
             // 
-            this.button1.Location = new System.Drawing.Point(649, 42);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Test iCOM";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.recordNumDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.recordNumDropDown.FormattingEnabled = true;
+            this.recordNumDropDown.Location = new System.Drawing.Point(197, 132);
+            this.recordNumDropDown.Name = "recordNumDropDown";
+            this.recordNumDropDown.Size = new System.Drawing.Size(60, 21);
+            this.recordNumDropDown.TabIndex = 18;
             // 
             // IQM_TranslationTable
             // 
@@ -981,7 +994,6 @@ namespace IQM_TranslationTable
         private Button pauseButton;
         private Label label21;
         private ProgressBar progressBar1;
-        private TextBox recordNumTextBox;
         private Label label23;
         private ComboBox comDropDown;
         private ComboBox baudrateDropDown;
@@ -1001,6 +1013,8 @@ namespace IQM_TranslationTable
         private Button motor1RefPositionButton;
         private Button moveEventButton;
         private Button button1;
+        private Button button2;
+        private ComboBox recordNumDropDown;
     }
 }
 
