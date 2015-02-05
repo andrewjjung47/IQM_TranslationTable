@@ -65,45 +65,45 @@ namespace IQM_TranslationTable
             this.button2 = new System.Windows.Forms.Button();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
             this.recordSettings = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label8 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.motorSettings = new System.Windows.Forms.DataGridView();
-            this.MotorSettingMotor2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MotorSettingMotor1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MotorSettingMotor2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.recordNumDropDown = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.motor1AbsPosTextBox = new System.Windows.Forms.TextBox();
             this.motor1RelPosTextBox = new System.Windows.Forms.TextBox();
+            this.motor1AbsPosTextBox = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.motor2AbsPosTextBox = new System.Windows.Forms.TextBox();
             this.motor2RelPosTextBox = new System.Windows.Forms.TextBox();
+            this.motor2AbsPosTextBox = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.motor1LeftButton = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.motor1StepsTextBox = new System.Windows.Forms.TextBox();
-            this.motor1SpeedTextBox = new System.Windows.Forms.TextBox();
-            this.motor1RightButton = new System.Windows.Forms.Button();
-            this.motor1HomeButton = new System.Windows.Forms.Button();
             this.motor1RefPositionButton = new System.Windows.Forms.Button();
+            this.motor1HomeButton = new System.Windows.Forms.Button();
+            this.motor1RightButton = new System.Windows.Forms.Button();
+            this.motor1SpeedTextBox = new System.Windows.Forms.TextBox();
+            this.motor1StepsTextBox = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.motor1LeftButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.motor2LeftButton = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.motor2StepsTextBox = new System.Windows.Forms.TextBox();
-            this.motor2SpeedTextBox = new System.Windows.Forms.TextBox();
-            this.motor2RightButton = new System.Windows.Forms.Button();
-            this.motor2HomeButton = new System.Windows.Forms.Button();
             this.motor2RefPositionButton = new System.Windows.Forms.Button();
+            this.motor2HomeButton = new System.Windows.Forms.Button();
+            this.motor2RightButton = new System.Windows.Forms.Button();
+            this.motor2SpeedTextBox = new System.Windows.Forms.TextBox();
+            this.motor2StepsTextBox = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.motor2LeftButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -372,7 +372,7 @@ namespace IQM_TranslationTable
             this.logFolderTextBox.Name = "logFolderTextBox";
             this.logFolderTextBox.Size = new System.Drawing.Size(333, 20);
             this.logFolderTextBox.TabIndex = 13;
-            this.logFolderTextBox.Text = "C:\\Temp";
+            this.logFolderTextBox.Text = "C:\\Temp\\IQMLogs";
             // 
             // label7
             // 
@@ -493,18 +493,18 @@ namespace IQM_TranslationTable
             this.recordSettings.Size = new System.Drawing.Size(264, 201);
             this.recordSettings.TabIndex = 8;
             // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Motor2";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 66;
-            // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.HeaderText = "Motor1";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dataGridViewTextBoxColumn3.Width = 66;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Motor2";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 66;
             // 
             // label8
             // 
@@ -543,18 +543,18 @@ namespace IQM_TranslationTable
             this.motorSettings.Size = new System.Drawing.Size(264, 91);
             this.motorSettings.TabIndex = 6;
             // 
-            // MotorSettingMotor2
-            // 
-            this.MotorSettingMotor2.HeaderText = "Motor2";
-            this.MotorSettingMotor2.Name = "MotorSettingMotor2";
-            this.MotorSettingMotor2.Width = 66;
-            // 
             // MotorSettingMotor1
             // 
             this.MotorSettingMotor1.HeaderText = "Motor1";
             this.MotorSettingMotor1.Name = "MotorSettingMotor1";
             this.MotorSettingMotor1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.MotorSettingMotor1.Width = 66;
+            // 
+            // MotorSettingMotor2
+            // 
+            this.MotorSettingMotor2.HeaderText = "Motor2";
+            this.MotorSettingMotor2.Name = "MotorSettingMotor2";
+            this.MotorSettingMotor2.Width = 66;
             // 
             // label5
             // 
@@ -603,25 +603,15 @@ namespace IQM_TranslationTable
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Motor1";
             // 
-            // label9
+            // motor1RelPosTextBox
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 20);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 16);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Abs. Position:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(3, 45);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(86, 16);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "Rel. Position:";
+            this.motor1RelPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.motor1RelPosTextBox.Location = new System.Drawing.Point(103, 45);
+            this.motor1RelPosTextBox.Name = "motor1RelPosTextBox";
+            this.motor1RelPosTextBox.ReadOnly = true;
+            this.motor1RelPosTextBox.Size = new System.Drawing.Size(91, 20);
+            this.motor1RelPosTextBox.TabIndex = 13;
+            this.motor1RelPosTextBox.Text = "homing required";
             // 
             // motor1AbsPosTextBox
             // 
@@ -633,15 +623,25 @@ namespace IQM_TranslationTable
             this.motor1AbsPosTextBox.TabIndex = 12;
             this.motor1AbsPosTextBox.Text = "homing required";
             // 
-            // motor1RelPosTextBox
+            // label16
             // 
-            this.motor1RelPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motor1RelPosTextBox.Location = new System.Drawing.Point(103, 45);
-            this.motor1RelPosTextBox.Name = "motor1RelPosTextBox";
-            this.motor1RelPosTextBox.ReadOnly = true;
-            this.motor1RelPosTextBox.Size = new System.Drawing.Size(91, 20);
-            this.motor1RelPosTextBox.TabIndex = 13;
-            this.motor1RelPosTextBox.Text = "homing required";
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(3, 45);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(86, 16);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Rel. Position:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(3, 20);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 16);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Abs. Position:";
             // 
             // groupBox5
             // 
@@ -657,25 +657,15 @@ namespace IQM_TranslationTable
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Motor2";
             // 
-            // label18
+            // motor2RelPosTextBox
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(3, 20);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(89, 16);
-            this.label18.TabIndex = 9;
-            this.label18.Text = "Abs. Position:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(3, 45);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(86, 16);
-            this.label17.TabIndex = 10;
-            this.label17.Text = "Rel. Position:";
+            this.motor2RelPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.motor2RelPosTextBox.Location = new System.Drawing.Point(103, 45);
+            this.motor2RelPosTextBox.Name = "motor2RelPosTextBox";
+            this.motor2RelPosTextBox.ReadOnly = true;
+            this.motor2RelPosTextBox.Size = new System.Drawing.Size(91, 20);
+            this.motor2RelPosTextBox.TabIndex = 14;
+            this.motor2RelPosTextBox.Text = "homing required";
             // 
             // motor2AbsPosTextBox
             // 
@@ -687,15 +677,25 @@ namespace IQM_TranslationTable
             this.motor2AbsPosTextBox.TabIndex = 13;
             this.motor2AbsPosTextBox.Text = "homing required";
             // 
-            // motor2RelPosTextBox
+            // label17
             // 
-            this.motor2RelPosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motor2RelPosTextBox.Location = new System.Drawing.Point(103, 45);
-            this.motor2RelPosTextBox.Name = "motor2RelPosTextBox";
-            this.motor2RelPosTextBox.ReadOnly = true;
-            this.motor2RelPosTextBox.Size = new System.Drawing.Size(91, 20);
-            this.motor2RelPosTextBox.TabIndex = 14;
-            this.motor2RelPosTextBox.Text = "homing required";
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(3, 45);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(86, 16);
+            this.label17.TabIndex = 10;
+            this.label17.Text = "Rel. Position:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(3, 20);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(89, 16);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Abs. Position:";
             // 
             // label12
             // 
@@ -727,62 +727,15 @@ namespace IQM_TranslationTable
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Motor1";
             // 
-            // motor1LeftButton
+            // motor1RefPositionButton
             // 
-            this.motor1LeftButton.BackColor = System.Drawing.SystemColors.Control;
-            this.motor1LeftButton.Location = new System.Drawing.Point(6, 51);
-            this.motor1LeftButton.Name = "motor1LeftButton";
-            this.motor1LeftButton.Size = new System.Drawing.Size(61, 25);
-            this.motor1LeftButton.TabIndex = 0;
-            this.motor1LeftButton.Text = "<< Left";
-            this.motor1LeftButton.UseVisualStyleBackColor = false;
-            this.motor1LeftButton.Click += new System.EventHandler(this.motor1LeftButton_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(6, 27);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 13);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Steps:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(118, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(76, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Speed (mm/s):";
-            // 
-            // motor1StepsTextBox
-            // 
-            this.motor1StepsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motor1StepsTextBox.Location = new System.Drawing.Point(43, 25);
-            this.motor1StepsTextBox.Name = "motor1StepsTextBox";
-            this.motor1StepsTextBox.Size = new System.Drawing.Size(61, 20);
-            this.motor1StepsTextBox.TabIndex = 3;
-            // 
-            // motor1SpeedTextBox
-            // 
-            this.motor1SpeedTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motor1SpeedTextBox.Location = new System.Drawing.Point(194, 25);
-            this.motor1SpeedTextBox.Name = "motor1SpeedTextBox";
-            this.motor1SpeedTextBox.Size = new System.Drawing.Size(61, 20);
-            this.motor1SpeedTextBox.TabIndex = 4;
-            // 
-            // motor1RightButton
-            // 
-            this.motor1RightButton.Location = new System.Drawing.Point(144, 51);
-            this.motor1RightButton.Name = "motor1RightButton";
-            this.motor1RightButton.Size = new System.Drawing.Size(61, 25);
-            this.motor1RightButton.TabIndex = 5;
-            this.motor1RightButton.Text = "Right >>";
-            this.motor1RightButton.UseVisualStyleBackColor = true;
-            this.motor1RightButton.Click += new System.EventHandler(this.motor1RightButton_Click);
+            this.motor1RefPositionButton.Location = new System.Drawing.Point(68, 51);
+            this.motor1RefPositionButton.Name = "motor1RefPositionButton";
+            this.motor1RefPositionButton.Size = new System.Drawing.Size(75, 25);
+            this.motor1RefPositionButton.TabIndex = 7;
+            this.motor1RefPositionButton.Text = "Reference";
+            this.motor1RefPositionButton.UseVisualStyleBackColor = true;
+            this.motor1RefPositionButton.Click += new System.EventHandler(this.motor1RefPositionButton_Click);
             // 
             // motor1HomeButton
             // 
@@ -794,15 +747,62 @@ namespace IQM_TranslationTable
             this.motor1HomeButton.UseVisualStyleBackColor = true;
             this.motor1HomeButton.Click += new System.EventHandler(this.motor1HomeButton_Click);
             // 
-            // motor1RefPositionButton
+            // motor1RightButton
             // 
-            this.motor1RefPositionButton.Location = new System.Drawing.Point(68, 51);
-            this.motor1RefPositionButton.Name = "motor1RefPositionButton";
-            this.motor1RefPositionButton.Size = new System.Drawing.Size(75, 25);
-            this.motor1RefPositionButton.TabIndex = 7;
-            this.motor1RefPositionButton.Text = "Reference";
-            this.motor1RefPositionButton.UseVisualStyleBackColor = true;
-            this.motor1RefPositionButton.Click += new System.EventHandler(this.motor1RefPositionButton_Click);
+            this.motor1RightButton.Location = new System.Drawing.Point(144, 51);
+            this.motor1RightButton.Name = "motor1RightButton";
+            this.motor1RightButton.Size = new System.Drawing.Size(61, 25);
+            this.motor1RightButton.TabIndex = 5;
+            this.motor1RightButton.Text = "Right >>";
+            this.motor1RightButton.UseVisualStyleBackColor = true;
+            this.motor1RightButton.Click += new System.EventHandler(this.motor1RightButton_Click);
+            // 
+            // motor1SpeedTextBox
+            // 
+            this.motor1SpeedTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.motor1SpeedTextBox.Location = new System.Drawing.Point(194, 25);
+            this.motor1SpeedTextBox.Name = "motor1SpeedTextBox";
+            this.motor1SpeedTextBox.Size = new System.Drawing.Size(61, 20);
+            this.motor1SpeedTextBox.TabIndex = 4;
+            // 
+            // motor1StepsTextBox
+            // 
+            this.motor1StepsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.motor1StepsTextBox.Location = new System.Drawing.Point(43, 25);
+            this.motor1StepsTextBox.Name = "motor1StepsTextBox";
+            this.motor1StepsTextBox.Size = new System.Drawing.Size(61, 20);
+            this.motor1StepsTextBox.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(118, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(76, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Speed (mm/s):";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(6, 27);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Steps:";
+            // 
+            // motor1LeftButton
+            // 
+            this.motor1LeftButton.BackColor = System.Drawing.SystemColors.Control;
+            this.motor1LeftButton.Location = new System.Drawing.Point(6, 51);
+            this.motor1LeftButton.Name = "motor1LeftButton";
+            this.motor1LeftButton.Size = new System.Drawing.Size(61, 25);
+            this.motor1LeftButton.TabIndex = 0;
+            this.motor1LeftButton.Text = "<< Left";
+            this.motor1LeftButton.UseVisualStyleBackColor = false;
+            this.motor1LeftButton.Click += new System.EventHandler(this.motor1LeftButton_Click);
             // 
             // groupBox3
             // 
@@ -824,62 +824,15 @@ namespace IQM_TranslationTable
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Motor2";
             // 
-            // motor2LeftButton
+            // motor2RefPositionButton
             // 
-            this.motor2LeftButton.BackColor = System.Drawing.SystemColors.Control;
-            this.motor2LeftButton.Location = new System.Drawing.Point(6, 51);
-            this.motor2LeftButton.Name = "motor2LeftButton";
-            this.motor2LeftButton.Size = new System.Drawing.Size(61, 25);
-            this.motor2LeftButton.TabIndex = 0;
-            this.motor2LeftButton.Text = "<< Left";
-            this.motor2LeftButton.UseVisualStyleBackColor = false;
-            this.motor2LeftButton.Click += new System.EventHandler(this.motor2LeftButton_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(6, 27);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(37, 13);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "Steps:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(118, 27);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(76, 13);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Speed (mm/s):";
-            // 
-            // motor2StepsTextBox
-            // 
-            this.motor2StepsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motor2StepsTextBox.Location = new System.Drawing.Point(43, 25);
-            this.motor2StepsTextBox.Name = "motor2StepsTextBox";
-            this.motor2StepsTextBox.Size = new System.Drawing.Size(61, 20);
-            this.motor2StepsTextBox.TabIndex = 3;
-            // 
-            // motor2SpeedTextBox
-            // 
-            this.motor2SpeedTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.motor2SpeedTextBox.Location = new System.Drawing.Point(194, 25);
-            this.motor2SpeedTextBox.Name = "motor2SpeedTextBox";
-            this.motor2SpeedTextBox.Size = new System.Drawing.Size(61, 20);
-            this.motor2SpeedTextBox.TabIndex = 4;
-            // 
-            // motor2RightButton
-            // 
-            this.motor2RightButton.Location = new System.Drawing.Point(144, 51);
-            this.motor2RightButton.Name = "motor2RightButton";
-            this.motor2RightButton.Size = new System.Drawing.Size(61, 25);
-            this.motor2RightButton.TabIndex = 5;
-            this.motor2RightButton.Text = "Right >>";
-            this.motor2RightButton.UseVisualStyleBackColor = true;
-            this.motor2RightButton.Click += new System.EventHandler(this.motor2RightButton_Click);
+            this.motor2RefPositionButton.Location = new System.Drawing.Point(68, 51);
+            this.motor2RefPositionButton.Name = "motor2RefPositionButton";
+            this.motor2RefPositionButton.Size = new System.Drawing.Size(75, 25);
+            this.motor2RefPositionButton.TabIndex = 7;
+            this.motor2RefPositionButton.Text = "Reference";
+            this.motor2RefPositionButton.UseVisualStyleBackColor = true;
+            this.motor2RefPositionButton.Click += new System.EventHandler(this.motor2RefPositionButton_Click);
             // 
             // motor2HomeButton
             // 
@@ -891,15 +844,62 @@ namespace IQM_TranslationTable
             this.motor2HomeButton.UseVisualStyleBackColor = true;
             this.motor2HomeButton.Click += new System.EventHandler(this.motor2HomeButton_Click);
             // 
-            // motor2RefPositionButton
+            // motor2RightButton
             // 
-            this.motor2RefPositionButton.Location = new System.Drawing.Point(68, 51);
-            this.motor2RefPositionButton.Name = "motor2RefPositionButton";
-            this.motor2RefPositionButton.Size = new System.Drawing.Size(75, 25);
-            this.motor2RefPositionButton.TabIndex = 7;
-            this.motor2RefPositionButton.Text = "Reference";
-            this.motor2RefPositionButton.UseVisualStyleBackColor = true;
-            this.motor2RefPositionButton.Click += new System.EventHandler(this.motor2RefPositionButton_Click);
+            this.motor2RightButton.Location = new System.Drawing.Point(144, 51);
+            this.motor2RightButton.Name = "motor2RightButton";
+            this.motor2RightButton.Size = new System.Drawing.Size(61, 25);
+            this.motor2RightButton.TabIndex = 5;
+            this.motor2RightButton.Text = "Right >>";
+            this.motor2RightButton.UseVisualStyleBackColor = true;
+            this.motor2RightButton.Click += new System.EventHandler(this.motor2RightButton_Click);
+            // 
+            // motor2SpeedTextBox
+            // 
+            this.motor2SpeedTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.motor2SpeedTextBox.Location = new System.Drawing.Point(194, 25);
+            this.motor2SpeedTextBox.Name = "motor2SpeedTextBox";
+            this.motor2SpeedTextBox.Size = new System.Drawing.Size(61, 20);
+            this.motor2SpeedTextBox.TabIndex = 4;
+            // 
+            // motor2StepsTextBox
+            // 
+            this.motor2StepsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.motor2StepsTextBox.Location = new System.Drawing.Point(43, 25);
+            this.motor2StepsTextBox.Name = "motor2StepsTextBox";
+            this.motor2StepsTextBox.Size = new System.Drawing.Size(61, 20);
+            this.motor2StepsTextBox.TabIndex = 3;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(118, 27);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Speed (mm/s):";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(6, 27);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(37, 13);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Steps:";
+            // 
+            // motor2LeftButton
+            // 
+            this.motor2LeftButton.BackColor = System.Drawing.SystemColors.Control;
+            this.motor2LeftButton.Location = new System.Drawing.Point(6, 51);
+            this.motor2LeftButton.Name = "motor2LeftButton";
+            this.motor2LeftButton.Size = new System.Drawing.Size(61, 25);
+            this.motor2LeftButton.TabIndex = 0;
+            this.motor2LeftButton.Text = "<< Left";
+            this.motor2LeftButton.UseVisualStyleBackColor = false;
+            this.motor2LeftButton.Click += new System.EventHandler(this.motor2LeftButton_Click);
             // 
             // panel2
             // 

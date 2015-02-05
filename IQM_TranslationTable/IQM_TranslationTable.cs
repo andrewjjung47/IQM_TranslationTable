@@ -57,6 +57,7 @@ namespace IQM_TranslationTable
 
         private void InitializeButton_Click(object sender, EventArgs e)
         {
+            // Ensures a COM port is selected
             if (comDropDown.SelectedItem == null)
             {
                 MessageBox.Show("Please select an appropriate COM port or check serial port connection.",
@@ -72,9 +73,16 @@ namespace IQM_TranslationTable
             {
                 try
                 {
+                    // Create C:\Temp\IQMLog if it does not exist
+                    if (!Utils.EnsurePath(logFolderTextBox.Text))
+                    {
+                        return;
+                    }
+
                     CSM.Initialize();
                     UI.QueryMotorSettings();
 
+                    // Disable related control panels
                     InitializeButton.Text = "Change Motor Settings";
                     InitializeButtonClick = true;
 
@@ -83,6 +91,7 @@ namespace IQM_TranslationTable
                     baudrateDropDown.Enabled = false;
                     motorSettings.DefaultCellStyle.BackColor = SystemColors.Control;
 
+                    // Start button enabled when both are clicked
                     if (InitializeButtonClick == true && LoadRecordButtonClick == true)
                     {
                         startButton.Enabled = true;
@@ -98,6 +107,7 @@ namespace IQM_TranslationTable
             }
             else
             {
+                // Enable related control panels
                 InitializeButton.Text = "Initialize Motor";
                 InitializeButtonClick = false;
 

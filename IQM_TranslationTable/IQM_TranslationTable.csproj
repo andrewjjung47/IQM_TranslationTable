@@ -119,6 +119,7 @@
       <DependentUpon>IQM_TranslationTable.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Logger.cs" />
     <Compile Include="TransTableMotor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
