@@ -19,3 +19,24 @@
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.pdb
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\Commands.dll
 \\rmpfs04\homes04\junga\My Documents\Visual Studio 2013\Projects\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.CommandLine.resources
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\IQM_TranslationTable.exe.config
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.exe
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.pdb
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.csprojResolveAssemblyReference.cache
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.CommandLine.resources
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.iCOMTest.resources
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.IQM_TranslationTable.resources
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.Properties.Resources.resources
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\obj\x86\Release\IQM_TranslationTable.csproj.GenerateResource.Cache
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\iCOMClient.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\mfc42.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\mfc42u.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\msvcirt.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\msvcp60.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\msvcrt.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\IQM_TranslationTable.exe
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\IQM_TranslationTable.pdb
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\Commands.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\IQM.Common.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\IQM.Elekta.ICom.dll
+N:\IQM Project\Andrew\Translation Table\Translation Table App\IQM_TranslationTable\IQM_TranslationTable\bin\x86\Release\IQM.Elekta.IComInterface.dll

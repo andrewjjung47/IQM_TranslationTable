@@ -14,8 +14,6 @@ namespace IQM_TranslationTable
         public TransTableMotor motor2;
         private IQM_TranslationTable form;
 
-        public static string logDirectory;
-
         // Used when all the movements are completed
         public event EventHandler Motor1ProfileEnded;
         public event EventHandler Motor2ProfileEnded;
@@ -132,11 +130,10 @@ namespace IQM_TranslationTable
             motor2.Home();
 
             // String array to save position data
-            string[] LogText = new string[motor1.TravelRepeat * motor2.TravelRepeat + 1];
-            LogText[0] = "Motor2Pos Motor1Pos StartTime EndTime";
 
             for (int i = 0; i < motor2.TravelRepeat; i++) // loop for motor2 movement
             {
+                form.inputFlag = true;
                 String tempPos = motor2.CurrentRelPosition.ToString(); // temporary holder for motor2 position
                 for (int j = 0; j < motor1.TravelRepeat; j++) // loop for motor1 movement
                 {
@@ -145,9 +142,7 @@ namespace IQM_TranslationTable
                     motor1.StartTravelProfile();
                     motor1.WaitMotor();
 
-                    LogText[motor2.TravelRepeat * i + j + 1] = tempPos + " " + motor1.CurrentRelPosition.ToString() + " " + DateTime.Now.ToString();
                     Thread.Sleep(1000);
-                    LogText[motor1.TravelRepeat * i + j + 1] += " " + DateTime.Now.ToString();
 
                     form.inputFlag = true;
                 }
@@ -164,11 +159,6 @@ namespace IQM_TranslationTable
 
             OnMotor1ProfileEnded(EventArgs.Empty);
             OnMotor2ProfileEnded(EventArgs.Empty);
-
-            if (logDirectory != null)
-            {
-                System.IO.File.WriteAllLines(@logDirectory, LogText);
-            }
         }
         public void ManualHome(int motorNumber)
         {
@@ -230,14 +220,16 @@ namespace IQM_TranslationTable
             }
         }
 
-        protected virtual void OnMotor1ProfileEnded(EventArgs e)
+        public virtual void OnMotor1ProfileEnded(EventArgs e)
         {
             if (Motor1ProfileEnded != null) Motor1ProfileEnded(this, e);
+            motor1.status = MotorStatus.Stopped;
         }
 
-        protected virtual void OnMotor2ProfileEnded(EventArgs e)
+        public virtual void OnMotor2ProfileEnded(EventArgs e)
         {
             if (Motor2ProfileEnded != null) Motor2ProfileEnded(this, e);
+            motor2.status = MotorStatus.Stopped;
         }
 
         public void WaitEvent()

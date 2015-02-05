@@ -105,7 +105,6 @@
       <DependentUpon>CommandLine.cs</DependentUpon>
     </Compile>
     <Compile Include="Conversion.cs" />
-    <Compile Include="CustomizeControls.cs" />
     <Compile Include="ControlUI.cs" />
     <Compile Include="iCOMTest.cs">
       <SubType>Form</SubType>
@@ -124,6 +123,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslationTable.cs" />
+    <Compile Include="Utils.cs" />
     <EmbeddedResource Include="CommandLine.resx">
       <DependentUpon>CommandLine.cs</DependentUpon>
     </EmbeddedResource>

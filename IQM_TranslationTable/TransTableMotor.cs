@@ -11,6 +11,8 @@ namespace IQM_TranslationTable
 {
     public class TransTableMotor : ComMotorCommands
     {
+        public MotorStatus status = MotorStatus.Stopped;
+
         // Whether the table has been homed and aware of its position or not
         public bool Referenced
         { get; private set; }
@@ -50,7 +52,7 @@ namespace IQM_TranslationTable
             {
                 if (value < 1)
                 {
-                    throw new ArgumentOutOfRangeException("Repeat number must be greater than 0.");
+                    ErrorMessage = "Repeat number must be greater than 0.";
                 }
                 else
                 {
@@ -68,7 +70,7 @@ namespace IQM_TranslationTable
             {
                 if (value < 1 | value > 31)
                 {
-                    throw new ArgumentOutOfRangeException("Record number must be between 1 and 31.");
+                    ErrorMessage = "Record number must be between 1 and 31.";
                 }
                 else
                 {
@@ -123,7 +125,7 @@ namespace IQM_TranslationTable
             }
 
             OnMotorStopped(new MotorStatusEventArg(QueryCurrentAbsPosition(), CurrentRelPosition));
-            Thread.Sleep(500); // gives 1000ms break between movements
+            Thread.Sleep(100); // gives 100ms break between movements
         }
 
 
@@ -275,11 +277,13 @@ namespace IQM_TranslationTable
         protected virtual void OnMotorMoving(MotorStatusEventArg e)
         {
             if (MotorMoving != null) MotorMoving(this, e);
+            status = MotorStatus.Moving;
         }
 
         protected virtual void OnMotorStopped(MotorStatusEventArg e)
         {
             if (MotorStopped != null) MotorStopped(this, e);
+            status = MotorStatus.Paused;
         }
     }
 
@@ -293,5 +297,12 @@ namespace IQM_TranslationTable
             AbsPosition = absPosition;
             RelPosition = relPosition;
         }
+    }
+
+    public enum MotorStatus
+    {
+        Moving,
+        Paused,
+        Stopped
     }
 }

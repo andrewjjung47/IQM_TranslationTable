@@ -14,7 +14,8 @@ namespace IQM_TranslationTable
         private TranslationTable CSM;
 
         // These dictionaries are used to delegate information transfer between 
-        // the UI and the motor controller. This is used to minimize hard coding. 
+        // the UI and the motor controller. This is used to minimize hard coding and 
+        // make the unit conversion easier. 
         public Dictionary<string, int> motor1Settings;
         public Dictionary<string, int> motor2Settings;
         public Dictionary<string, int> motor1Record;
@@ -57,8 +58,8 @@ namespace IQM_TranslationTable
                 "Acceleration", "Brake", "Repeat", "PositionDemand" };
 
             // Default record settings
-            int[] record1Values = { 0, 1600, 200, 0, 19113, 19113, 3, 1600 };
-            int[] record2Values = { 0, 1600, 200, 0, 19113, 19113, 1, 1600 };
+            int[] record1Values = { 0, 2400, 200, 0, 19113, 19113, 10, 3200 };
+            int[] record2Values = { 0, 2400, 200, 0, 19113, 19113, 2, 3200 };
 
             rowLength = recordHeaderNames.Length;
             this.form.RecordSettings.Rows.Add(rowLength);
@@ -135,6 +136,27 @@ namespace IQM_TranslationTable
             form.RecordNumDropDown.SelectedValue = CSM.motor1.RecordNum.ToString();
 
             form.RecordSettings.UpdateDataGridView(CSM.motor1.RecordSettings(), CSM.motor2.RecordSettings());
+        }
+    }
+
+    static class CustomizeControls
+    {
+        /* Methods to customize controls */
+
+        public static void UpdateDataGridView(this DataGridView dataGridView,
+            Dictionary<string, int> motor1Values, Dictionary<string, int> motor2Values)
+        {
+            /* Extension method to update DataGridView cell values.*/
+
+            string headerName; // headerName is used to get the value corresponding to the key
+
+            foreach (DataGridViewRow rows in dataGridView.Rows)
+            {
+                headerName = rows.HeaderCell.Value.ToString();
+
+                rows.Cells[0].Value = motor1Values[headerName];
+                rows.Cells[1].Value = motor2Values[headerName];
+            }
         }
     }
 }

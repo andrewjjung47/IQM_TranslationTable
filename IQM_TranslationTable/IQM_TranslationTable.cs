@@ -42,6 +42,8 @@ namespace IQM_TranslationTable
 
             CSM.Motor1ProfileEnded += CSM_Motor1ProfileEnded;
             CSM.Motor2ProfileEnded += CSM_Motor2ProfileEnded;
+
+            Application.ApplicationExit += new EventHandler(OnApplicationExit);
         }
 
         private void logDirectoryButton_Click(object sender, EventArgs e)
@@ -50,12 +52,22 @@ namespace IQM_TranslationTable
             if (result == DialogResult.OK)
             {
                 logFolderTextBox.Text = logFolderDialog.SelectedPath;
-                TranslationTable.logDirectory = logFolderDialog.SelectedPath;
             }
         }
 
         private void InitializeButton_Click(object sender, EventArgs e)
         {
+            if (comDropDown.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an appropriate COM port or check serial port connection.",
+                "COM Port Selection Cannot Be Empty!",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button1);
+
+                return;
+            }
+
             if (!InitializeButtonClick)
             {
                 try
@@ -71,21 +83,17 @@ namespace IQM_TranslationTable
                     baudrateDropDown.Enabled = false;
                     motorSettings.DefaultCellStyle.BackColor = SystemColors.Control;
 
-                    //reportError();
-                }
-                catch (NullReferenceException)
-                {
-                    Status1TextBox.Text = "Communication error.";
-                    Status2TextBox.Text = "Communication error.";
-
-                    if (comDropDown.SelectedItem == null)
+                    if (InitializeButtonClick == true && LoadRecordButtonClick == true)
                     {
-                        MessageBox.Show("Please select an appropriate COM port or check serial port connection.",
-                        "COM Port Selection Cannot Be Empty!",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation,
-                        MessageBoxDefaultButton.Button1);
+                        startButton.Enabled = true;
+                        panel2.Enabled = true;
                     }
+
+                    ResetError();
+                }
+                catch (SerialCommunicationException)
+                {
+                    ReportError();
                 }
             }
             else
@@ -97,6 +105,8 @@ namespace IQM_TranslationTable
                 comDropDown.Enabled = true;
                 baudrateDropDown.Enabled = true;
                 motorSettings.DefaultCellStyle.BackColor = SystemColors.Window;
+                startButton.Enabled = false;
+                panel2.Enabled = false;
 
                 Status1TextBox.Text = "";
                 Status2TextBox.Text = "";
@@ -118,20 +128,19 @@ namespace IQM_TranslationTable
                     recordNumDropDown.Enabled = false;
                     recordSettings.ReadOnly = true;
                     recordSettings.DefaultCellStyle.BackColor = SystemColors.Control;
-                    
-                    //reportError();
-                }
-                catch (NullReferenceException)
-                {
-                    Status1TextBox.Text = "Communication error.";
-                    Status2TextBox.Text = "Communication error.";
-                }
-                catch (ArgumentNullException)
-                {
-                    Status1TextBox.Text = "Communication error.";
-                    Status2TextBox.Text = "Communication error.";
-                }
 
+                    if (InitializeButtonClick == true && LoadRecordButtonClick == true)
+                    {
+                        startButton.Enabled = true;
+                        panel2.Enabled = true;
+                    }
+
+                    ResetError();
+                }
+                catch (SerialCommunicationException)
+                {
+                    ReportError();
+                }
             }
             else
             {
@@ -141,6 +150,8 @@ namespace IQM_TranslationTable
                 recordNumDropDown.Enabled = true;
                 recordSettings.ReadOnly = false;
                 recordSettings.DefaultCellStyle.BackColor = SystemColors.Window;
+                startButton.Enabled = false;
+                panel2.Enabled = false;
 
                 Status1TextBox.Text = "";
                 Status2TextBox.Text = "";
@@ -153,7 +164,7 @@ namespace IQM_TranslationTable
             CSMThread.Start();
         }
 
-        private void pauseButton_Click(object sender, EventArgs e)
+        public void pauseButton_Click(object sender, EventArgs e)
         {
             if (CSMThread != null)
             {
@@ -162,9 +173,12 @@ namespace IQM_TranslationTable
 
             CSM.motor1.StopTravelProfile();
             CSM.motor2.StopTravelProfile();
+
+            CSM.OnMotor1ProfileEnded(EventArgs.Empty);
+            CSM.OnMotor2ProfileEnded(EventArgs.Empty);
         }
 
-        private void reportError()
+        private void ReportError()
         {
             if (CSM.motor1.ErrorFlag)
             {
@@ -172,7 +186,7 @@ namespace IQM_TranslationTable
             }
             else
             {
-                Status1TextBox.Text = " OK";
+                Status1TextBox.Text = "";
             }
             if (CSM.motor2.ErrorFlag)
             {
@@ -180,43 +194,72 @@ namespace IQM_TranslationTable
             }
             else
             {
-                Status2TextBox.Text = " OK";
+                Status2TextBox.Text = "";
+            }
+        }
+
+        private void ResetError()
+        {
+            CSM.motor1.ResetErrorFlag();
+            CSM.motor2.ResetErrorFlag();
+            ReportError(); // update error message
+        }
+
+        private void manualMoveButtonClick(int direction, int motorAddress)
+        {
+            TextBox motorStepsTextBox, motorSpeedTextBox;
+
+            if (motorAddress == 1)
+            {
+                motorStepsTextBox = motor1StepsTextBox;
+                motorSpeedTextBox = motor1SpeedTextBox;
+            }
+            else
+            {
+                motorStepsTextBox = motor2StepsTextBox;
+                motorSpeedTextBox = motor2SpeedTextBox;
+            }
+
+            if (motorStepsTextBox.Text == "" || motorSpeedTextBox.Text == "")
+            {
+                MessageBox.Show("Travel steps and speed cannot be empty.",
+                    "Invalid travel steps and speed!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+            }
+            else
+            {
+                Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motorStepsTextBox.Text),
+                    Convert.ToInt32(motorSpeedTextBox.Text), direction, motorAddress));
+                t.Start();
             }
         }
 
         private void motor1LeftButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor1StepsTextBox.Text),
-                Convert.ToInt32(motor1SpeedTextBox.Text), 0, 1));
-            t.Start();
+            manualMoveButtonClick(0, 1);
         }
 
         private void motor2LeftButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor2StepsTextBox.Text),
-                Convert.ToInt32(motor2SpeedTextBox.Text), 0, 2));
-            t.Start();
+            manualMoveButtonClick(0, 2);
         }
 
         private void motor1RightButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor1StepsTextBox.Text),
-                Convert.ToInt32(motor1SpeedTextBox.Text), 1, 1));
-            t.Start();
+            manualMoveButtonClick(1, 1);
         }
 
         private void motor2RightButton_Click(object sender, EventArgs e)
         {
-            Thread t = new Thread(() => CSM.ManualMove(Convert.ToInt32(motor2StepsTextBox.Text),
-                Convert.ToInt32(motor2SpeedTextBox.Text), 1, 2));
-            t.Start();
+            manualMoveButtonClick(1, 2);
         }
 
         private void motor1HomeButton_Click(object sender, EventArgs e)
         {
             Thread t = new Thread(() => CSM.ManualHome(1));
             t.Start();
-
         }
 
         private void motor2HomeButton_Click(object sender, EventArgs e)
@@ -240,7 +283,7 @@ namespace IQM_TranslationTable
         delegate void MotorStatusCallBack(object sender, MotorStatusEventArg e);
         delegate void MotorStatusEndCallBack(object sender, EventArgs e);
 
-        void motor1_MotorMoving(object sender, MotorStatusEventArg e)
+        private void motor1_MotorMoving(object sender, MotorStatusEventArg e)
         {
             if (this.motor1StatusLabel.InvokeRequired || this.motor1AbsPosTextBox.InvokeRequired ||
                 motor1RelPosTextBox.InvokeRequired)
@@ -250,6 +293,8 @@ namespace IQM_TranslationTable
             }
             else
             {
+                groupBox2.Enabled = false;
+
                 motor1StatusLabel.Text = "Moving";
                 motor1StatusLabel.BackColor = System.Drawing.Color.LawnGreen;
 
@@ -258,7 +303,7 @@ namespace IQM_TranslationTable
             }
         }
 
-        void motor2_MotorMoving(object sender, MotorStatusEventArg e)
+        private void motor2_MotorMoving(object sender, MotorStatusEventArg e)
         {
             if (this.motor2StatusLabel.InvokeRequired || this.motor2AbsPosTextBox.InvokeRequired ||
                 motor2RelPosTextBox.InvokeRequired)
@@ -268,6 +313,8 @@ namespace IQM_TranslationTable
             }
             else
             {
+                groupBox3.Enabled = false;
+
                 motor2StatusLabel.Text = "Moving";
                 motor2StatusLabel.BackColor = System.Drawing.Color.LawnGreen;
 
@@ -276,7 +323,7 @@ namespace IQM_TranslationTable
             }
         }
 
-        void motor1_MotorStopped(object sender, MotorStatusEventArg e)
+        private void motor1_MotorStopped(object sender, MotorStatusEventArg e)
         {
             if (this.motor1StatusLabel.InvokeRequired || this.motor1AbsPosTextBox.InvokeRequired ||
                 motor1RelPosTextBox.InvokeRequired)
@@ -294,7 +341,7 @@ namespace IQM_TranslationTable
             }
         }
 
-        void motor2_MotorStopped(object sender, MotorStatusEventArg e)
+        private void motor2_MotorStopped(object sender, MotorStatusEventArg e)
         {
             if (this.motor2StatusLabel.InvokeRequired || this.motor2AbsPosTextBox.InvokeRequired ||
                 motor2RelPosTextBox.InvokeRequired)
@@ -312,7 +359,7 @@ namespace IQM_TranslationTable
             }
         }
 
-        void CSM_Motor1ProfileEnded(object sender, EventArgs e)
+        private void CSM_Motor1ProfileEnded(object sender, EventArgs e)
         {
             if (this.motor1StatusLabel.InvokeRequired)
             {
@@ -321,12 +368,14 @@ namespace IQM_TranslationTable
             }
             else
             {
+                groupBox2.Enabled = true;
+
                 motor1StatusLabel.Text = "Profile ended";
                 motor1StatusLabel.BackColor = System.Drawing.SystemColors.GrayText;
             }
         }
 
-        void CSM_Motor2ProfileEnded(object sender, EventArgs e)
+        private void CSM_Motor2ProfileEnded(object sender, EventArgs e)
         {
             if (this.motor2StatusLabel.InvokeRequired)
             {
@@ -335,9 +384,16 @@ namespace IQM_TranslationTable
             }
             else
             {
+                groupBox3.Enabled = true;
+
                 motor2StatusLabel.Text = "Profile ended";
                 motor2StatusLabel.BackColor = System.Drawing.SystemColors.GrayText;
             }
+        }
+
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            ComMotorCommands.ClosePort();
         }
 
         public ComboBox COMDropDown
@@ -395,6 +451,11 @@ namespace IQM_TranslationTable
             get { return motor2StatusLabel; }
         }
 
+        public DataGridView MeasurementDataGridView
+        {
+            get { return dataGridView1; }
+        }
+
         public EventWaitHandle _move = new AutoResetEvent(false);
         public bool inputFlag = true;
 
@@ -422,6 +483,12 @@ namespace IQM_TranslationTable
         {
             CommandLine commandLine = new CommandLine(this);
             commandLine.Show();
+        }
+
+        private void clearGridButton_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
         }
     }
 }

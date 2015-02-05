@@ -53,7 +53,7 @@ namespace IQM_TranslationTable
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            form.CSM.motor1.ClosePort();
+            ComMotorCommands.ClosePort();
 
             commandTextBox.Enabled = false;
             sendButton.Enabled = false;

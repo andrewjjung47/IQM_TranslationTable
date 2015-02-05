@@ -24,7 +24,6 @@ namespace IQM_TranslationTable
         private IComMonitor monitor;
         private IQM_TranslationTable form;
         private ObservableCollection<short> stateQueue;
-        private event EventHandler MoveTable;
 
         public iCOMTest(IQM_TranslationTable form)
         {
@@ -33,20 +32,46 @@ namespace IQM_TranslationTable
             this.form = form;
         }
 
-        private void HandleChange(object sender, NotifyCollectionChangedEventArgs e)
+        // Change this later
+        private readonly int irradNum = 2;
+        private int irradCount = 0;
+        private int IrradCount
         {
-            if (stateQueue[stateQueue.Count - 1] == 5)
+            get { return irradCount; }
+            set
             {
-                int indexStart = stateQueue.IndexOf(4);
-                int indexIrradiate = stateQueue.IndexOf(5);
-                int indexTerminate = stateQueue.IndexOf(9);
-
-                if (indexStart < indexIrradiate &&
-                    indexIrradiate < indexTerminate &&
-                    indexTerminate < stateQueue.Count - 1)
+                irradCount = value;
+                if (irradCount == irradNum)
                 {
                     form.moveEvent();
+                    irradCount = 0;
                 }
+            }
+        }
+
+        private void HandleChange(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (stateQueue[stateQueue.Count - 1] == 9)
+            {
+                int indexStart = stateQueue.IndexOf(4);
+
+                if (indexStart != -1 && indexStart == stateQueue.Count - 3)
+                {
+                    IrradCount++;
+
+                    int index = form.MeasurementDataGridView.Rows.Add();
+                    DataGridViewRow row = form.MeasurementDataGridView.Rows[index];
+                    row.HeaderCell.Value = DateTime.Now.ToString("HH:mm:ss");
+                    row.Cells[0].Value = form.CSM.motor1.CurrentRelPosition;
+                    row.Cells[1].Value = form.CSM.motor2.CurrentRelPosition;
+                }
+                stateQueue.Clear();
+            }
+            else if (stateQueue[stateQueue.Count - 1] == 11)
+            {
+                form.pauseButton_Click(this, EventArgs.Empty);
+                stateQueue.Clear();
+                IrradCount = 0;
             }
         }
 
@@ -92,16 +117,17 @@ namespace IQM_TranslationTable
             {
                 try
                 {
-                    if (stateQueue.Count != 0)
+                    if (form.CSM.motor1.status == MotorStatus.Paused && 
+                        form.CSM.motor2.status == MotorStatus.Paused)
                     {
-                        if (stateQueue[stateQueue.Count - 1] != data.State)
+                        if (stateQueue.Count != 0 && stateQueue[stateQueue.Count - 1] != data.State)
                         {
                             stateQueue.Add(data.State);
                         }
-                    }
-                    else
-                    {
-                        stateQueue.Add(data.State);
+                        else if (stateQueue.Count == 0)
+                        {
+                            stateQueue.Add(data.State);
+                        }
                     }
                     Show(data);
                 }
@@ -131,6 +157,14 @@ namespace IQM_TranslationTable
         private void Log(string format, params object[] o)
         {
             Log(string.Format(format, o));
+        }
+
+        private void OnIcomFormExit(object sender, FormClosingEventArgs e)
+        {
+            if (icom != null)
+            {
+                icom.Stop();
+            }
         }
 
         private void connectButton_Click(object sender, EventArgs e)
@@ -182,6 +216,17 @@ namespace IQM_TranslationTable
         {
             textBox1.AppendText("Start simulation" + Environment.NewLine);
             new Thread(SimulateTable).Start();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            IrradCount++;
+
+            int index = form.MeasurementDataGridView.Rows.Add();
+            DataGridViewRow row = form.MeasurementDataGridView.Rows[index];
+            row.HeaderCell.Value = DateTime.Now.ToString("HH:mm:ss");
+            row.Cells[0].Value = form.CSM.motor1.CurrentRelPosition;
+            row.Cells[1].Value = form.CSM.motor2.CurrentRelPosition;
         }
     }
 }
