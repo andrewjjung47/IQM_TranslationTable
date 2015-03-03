@@ -6,7 +6,7 @@ namespace IQM_TranslationTable
 {
     class Utils
     {
-        public static bool EnsurePath(string path)
+        public static bool EnsurePathExists(string path)
         {
             /* Ensures the selected path exist. */
             if (!Directory.Exists(path))

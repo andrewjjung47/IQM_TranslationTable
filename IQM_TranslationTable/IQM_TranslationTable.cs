@@ -74,7 +74,7 @@ namespace IQM_TranslationTable
                 try
                 {
                     // Create C:\Temp\IQMLog if it does not exist
-                    if (!Utils.EnsurePath(logFolderTextBox.Text))
+                    if (!Utils.EnsurePathExists(logFolderTextBox.Text))
                     {
                         return;
                     }
