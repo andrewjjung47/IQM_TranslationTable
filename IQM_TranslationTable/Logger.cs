@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace IQM_TranslationTable
 {
-    public class Logger
+    /// <summary>
+    /// Write stream for log file.
+    /// </summary>
+    public class LogStream
     {
         private readonly object _locker = new Object();
 
         private StreamWriter sw;
-
-        private bool open;
 
         public string Path
         {
@@ -20,6 +21,7 @@ namespace IQM_TranslationTable
             set;
         }
 
+        private bool open = false;
         public bool Open()
         {
             if (!open)
@@ -43,32 +45,24 @@ namespace IQM_TranslationTable
             }
         }
 
-        public bool Close()
+        public void Close()
         {
             if (open)
             {
-                try
+                Write("Close");
+                if (sw != null)
                 {
-                    Write("Close");
-                    if (sw != null)
-                    {
-                        sw.Close();
-                        sw = null;
-                    }
-                }
-                catch (Exception)
-                {
-                    return false;
+                    sw.Close();
+                    sw = null;
                 }
                 open = false;
-                return true;
-            }
-            else
-            {
-                return true;
             }
         }
 
+        /// <summary>
+        /// Thread safe write to log file.
+        /// </summary>
+        /// <param name="message"></param>
         public void Write(string message)
         {
             if (open)
@@ -82,24 +76,27 @@ namespace IQM_TranslationTable
         }
     }
 
-    public class LoggerHelper
+    /// <summary>
+    /// Formats log write message with the name of the caller.
+    /// </summary>
+    public class Logger
     {
-        private Logger logger;
-        private string helperName;
+        private LogStream log;
+        private string callerName;
 
-        public LoggerHelper(Logger logger, string helperName)
+        public Logger(LogStream log, string callerName)
         {
-            this.logger = logger;
-            this.helperName = helperName;
+            this.log = log;
+            this.callerName = callerName;
         }
 
         public void Log(string message)
         {
-            if (logger != null)
+            if (log != null)
             {
                 string fullMessage = string.Format("{0, -10}  {1}",
-                    helperName, message);
-                logger.Write(fullMessage);
+                    callerName, message);
+                log.Write(fullMessage);
             }
         }
     }

@@ -18,10 +18,14 @@ namespace IQM_TranslationTable
         public event EventHandler Motor1ProfileEnded;
         public event EventHandler Motor2ProfileEnded;
 
-        public TranslationTable(IQM_TranslationTable form)
+        private Logger logger;
+
+        public TranslationTable(IQM_TranslationTable form, LogStream log)
         {
-            motor1 = new TransTableMotor();
-            motor2 = new TransTableMotor();
+            logger = new Logger(log, "TranslationTable");
+
+            motor1 = new TransTableMotor(log, "Motor1");
+            motor2 = new TransTableMotor(log, "Motor2");
 
             // Set motor address
             motor1.MotorAddresse = 1;
@@ -62,6 +66,8 @@ namespace IQM_TranslationTable
             // Set limit switch type as opener
             motor1.SetInputMaskEdge(458767);
             motor2.SetInputMaskEdge(458767);
+
+            logger.Log("Initialize");
         }
 
         public void LoadRecord()
@@ -122,10 +128,14 @@ namespace IQM_TranslationTable
             // Set settings for homing
             motor1.SetHoming();
             motor2.SetHoming();
+
+            logger.Log("Load record");
         }
 
         public void CSM()
         {
+            logger.Log("Start CSM");
+
             motor1.Home();
             motor2.Home();
 
@@ -159,6 +169,8 @@ namespace IQM_TranslationTable
 
             OnMotor1ProfileEnded(EventArgs.Empty);
             OnMotor2ProfileEnded(EventArgs.Empty);
+
+            logger.Log("End CSM");
         }
         public void ManualHome(int motorNumber)
         {

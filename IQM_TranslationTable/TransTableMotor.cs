@@ -11,6 +11,13 @@ namespace IQM_TranslationTable
 {
     public class TransTableMotor : ComMotorCommands
     {
+        private Logger logger;
+
+        public TransTableMotor(LogStream log, string motorName)
+        {
+            logger = new Logger(log, motorName);
+        }
+
         public MotorStatus status = MotorStatus.Stopped;
 
         // Whether the table has been homed and aware of its position or not
@@ -23,6 +30,9 @@ namespace IQM_TranslationTable
         public int SetRefPosition()
         {
             RefPosition = -GetPosition();
+
+            logger.Log("Reference position set at " + RefPosition);
+
             return RefPosition;
         }
 
@@ -114,10 +124,11 @@ namespace IQM_TranslationTable
             return CurrentAbsPosition;
         }
 
+        /// <summary>
+        /// Wait for motor to finish movement. 
+        /// </summary>
         public void WaitMotor()
         {
-            // Wait for motor to finish movement. 
-
             while (GetStatusByte() % 2 == 0)
             {
                 OnMotorMoving(new MotorStatusEventArg(QueryCurrentAbsPosition(), CurrentRelPosition));
@@ -128,6 +139,12 @@ namespace IQM_TranslationTable
             Thread.Sleep(100); // gives 100ms break between movements
         }
 
+        public override bool StartTravelProfile()
+        {
+            logger.Log(string.Format("Start moving at absolute position: {0}, relative position: {1}",
+                CurrentAbsPosition, CurrentRelPosition));
+            return base.StartTravelProfile();
+        }
 
         /* Homing related commands */
 
@@ -163,6 +180,8 @@ namespace IQM_TranslationTable
              * towards the switch in external reference run. If the motor was referenced before,
              * the table is moved to 1cm position away from the switch in fast speed and external reference 
              * run is performed at slow speed. */
+
+            logger.Log("Start homing.");
 
             ChooseRecord(homeRecordNum);
 
@@ -236,6 +255,8 @@ namespace IQM_TranslationTable
             Thread.Sleep(500); // give 500ms pause after the homing.
 
             ChooseRecord(RecordNum); // revert back to run record
+
+            logger.Log("Finish homing");
         }
 
 
@@ -284,6 +305,9 @@ namespace IQM_TranslationTable
         {
             if (MotorStopped != null) MotorStopped(this, e);
             status = MotorStatus.Paused;
+
+            logger.Log(string.Format("Stopped moving at absolute position: {0}, relative position: {1}",
+                e.AbsPosition, e.RelPosition));
         }
     }
 

@@ -26,11 +26,15 @@ namespace IQM_TranslationTable
         private bool InitializeButtonClick = false;
         private bool LoadRecordButtonClick = false;
 
-        public IQM_TranslationTable()
+        private LogStream log;
+
+        public IQM_TranslationTable(LogStream log)
         {
             InitializeComponent();
 
-            CSM = new TranslationTable(this);
+            this.log = log;
+
+            CSM = new TranslationTable(this, log);
 
             UI = new ControlUI(this, CSM);
 
@@ -76,6 +80,12 @@ namespace IQM_TranslationTable
                     // Create C:\Temp\IQMLog if it does not exist
                     if (!Utils.EnsurePathExists(logFolderTextBox.Text))
                     {
+                        return;
+                    }
+                    log.Path = logFolderTextBox.Text;
+                    if (!log.Open())
+                    {
+                        MessageBox.Show("Could not creat a log file to the specified path!");
                         return;
                     }
 
@@ -404,6 +414,7 @@ namespace IQM_TranslationTable
         private void OnApplicationExit(object sender, EventArgs e)
         {
             ComMotorCommands.ClosePort();
+            log.Close();
         }
 
         public ComboBox COMDropDown
