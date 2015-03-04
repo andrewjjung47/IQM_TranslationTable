@@ -15,10 +15,16 @@ namespace IQM_TranslationTable
 
         private StreamWriter sw;
 
+        private string path;
         public string Path
         {
-            get;
-            set;
+            get { return path; }
+            set
+            {
+                string date = DateTime.Now.ToString("yyyyMMdd");
+                path = string.Format("{0}\\TransTableLog_{1}.txt", 
+                    value, date);
+            }
         }
 
         private bool open = false;
@@ -94,7 +100,7 @@ namespace IQM_TranslationTable
         {
             if (log != null)
             {
-                string fullMessage = string.Format("{0, -10}  {1}",
+                string fullMessage = string.Format("{0, -15}  {1}",
                     callerName, message);
                 log.Write(fullMessage);
             }

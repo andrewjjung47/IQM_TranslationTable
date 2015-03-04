@@ -25,7 +25,7 @@ namespace IQM_TranslationTable
 
         public TranslationTable(IQM_TranslationTable form, LogStream log)
         {
-            logger = new Logger(log, "TranslationTable");
+            logger = new Logger(log, "TransTable");
 
             motor1 = new TransTableMotor(log, "Motor1");
             motor2 = new TransTableMotor(log, "Motor2");
