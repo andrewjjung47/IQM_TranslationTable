@@ -23,20 +23,25 @@ namespace IQM_TranslationTable
         //TODO: implement logging for iCOM module.
         //TODO: integreate iCOM module to the main UI and run it in background.
         //      only show details when the user wants it.
+        //TODO: clean up iCOMTest.cs
 
         private IComVxListener icom;
         private IComMonitor monitor;
         private IQM_TranslationTable form;
         private ObservableCollection<short> stateQueue;
 
-        public iCOMTest(IQM_TranslationTable form)
+        private Logger logger;
+
+        public iCOMTest(IQM_TranslationTable form, LogStream log)
         {
             InitializeComponent();
             monitor = new IComMonitor();
             this.form = form;
+
+            logger = new Logger(log, "iCOM");
         }
 
-        // Change this later
+        // TODO: Change this later
         private readonly int irradNum = 2;
         private int irradCount = 0;
         private int IrradCount
@@ -45,9 +50,13 @@ namespace IQM_TranslationTable
             set
             {
                 irradCount = value;
+
                 if (irradCount == irradNum)
                 {
                     form.moveEvent();
+
+                    logger.Log("Command the table to move.");
+
                     irradCount = 0;
                 }
             }
@@ -68,6 +77,9 @@ namespace IQM_TranslationTable
                     row.HeaderCell.Value = DateTime.Now.ToString("HH:mm:ss");
                     row.Cells[0].Value = form.CSM.motor1.CurrentRelPosition;
                     row.Cells[1].Value = form.CSM.motor2.CurrentRelPosition;
+
+                    logger.Log(string.Format("Segment successfully delivered at motor1: {0}, motor2: {1}",
+                        form.CSM.motor1.CurrentRelPosition, form.CSM.motor2.CurrentRelPosition));
                 }
                 stateQueue.Clear();
             }
@@ -79,6 +91,9 @@ namespace IQM_TranslationTable
             }
         }
 
+        /// <summary>
+        /// Make connection to iCOM and initialize queue for state variables.
+        /// </summary>
         private void Connect()
         {
             stateQueue = new ObservableCollection<short>();
@@ -92,11 +107,18 @@ namespace IQM_TranslationTable
             icom.Start(ip);
 
             monitor.Reset();
+
+            logger.Log("Connect to iCOM.");
         }
 
+        /// <summary>
+        /// Disconnect to iCOM
+        /// </summary>
         private void Disconnect()
         {
             icom.Stop();
+
+            logger.Log("Disconnect to iCOM.");
         }
 
         private void EventHandler(IComEventType eventType)
@@ -133,7 +155,9 @@ namespace IQM_TranslationTable
                             stateQueue.Add(data.State);
                         }
                     }
-                    Show(data);
+                    Log("Data {0}/{1}, seq {2}, {3}, [{4}]", 
+                        data.State, IComApi.StateToString(data.State), data.SeqNumber.ToString("x4"), 
+                        DateTimeStrings.TimeMs(data.Dt), data.InhibitCount);
                 }
                 catch (Exception)
                 {
@@ -141,20 +165,12 @@ namespace IQM_TranslationTable
             }
         }
 
-        private StreamWriter recorder;
-
-        private void Show(IComData data)
-        {
-            if (recorder != null)
-            {
-                data.Save(recorder);
-            }
-
-            Log("Data {0}/{1}, seq {2}, {3}, [{4}]", data.State, IComApi.StateToString(data.State), data.SeqNumber.ToString("x4"), DateTimeStrings.TimeMs(data.Dt), data.InhibitCount);
-        }
-
         private void Log(string text)
         {
+            if (logger != null)
+            {
+                logger.Log("text");
+            }
             conTextBox.AppendText(text + Environment.NewLine);
         }
 

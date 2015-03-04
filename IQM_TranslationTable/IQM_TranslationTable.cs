@@ -61,6 +61,9 @@ namespace IQM_TranslationTable
 
         private void InitializeButton_Click(object sender, EventArgs e)
         {
+            // TODO: add a feature to perform measurement without log file.
+            // TODO: test if there is a bug when log folder or file is newly created.
+
             // Ensures a COM port is selected
             if (comDropDown.SelectedItem == null)
             {
@@ -496,7 +499,7 @@ namespace IQM_TranslationTable
 
         private void button1_Click(object sender, EventArgs e)
         {
-            iCOMTest logTest = new iCOMTest(this);
+            iCOMTest logTest = new iCOMTest(this, log);
             logTest.Show();
         }
 
