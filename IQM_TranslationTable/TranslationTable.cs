@@ -10,6 +10,9 @@ namespace IQM_TranslationTable
 {
     public class TranslationTable
     {
+        //TODO: add comments
+        //TODO: implement interface for the ComMotorCommands library
+
         public TransTableMotor motor1;
         public TransTableMotor motor2;
         private IQM_TranslationTable form;
