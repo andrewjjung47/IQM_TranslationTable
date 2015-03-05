@@ -11,6 +11,7 @@ namespace IQM_TranslationTable
 {
     public class TransTableMotor : ComMotorCommands
     {
+        // TODO: add speed to the log when the table is moving 
         private Logger logger;
 
         public TransTableMotor(LogStream log, string motorName)
@@ -18,15 +19,20 @@ namespace IQM_TranslationTable
             logger = new Logger(log, motorName);
         }
 
-        public MotorStatus status = MotorStatus.Stopped;
+        public MotorStatus status = MotorStatus.Stopped; // initial state
 
-        // Whether the table has been homed and aware of its position or not
+        /// <summary>
+        /// Whether the table has been homed and aware of its position or not
+        /// </summary>
         public bool Referenced
         { get; private set; }
 
-        // Reference position set by the user.
+        /// <summary>
+        /// Reference position set by the user.
+        /// </summary>
         public int RefPosition
         { get; private set; }
+        // TODO: figure out why used this
         public int SetRefPosition()
         {
             RefPosition = -GetPosition();
@@ -36,8 +42,10 @@ namespace IQM_TranslationTable
             return RefPosition;
         }
 
-        // Current position relative to the homing limit switch (absolute position used by controller). 
-        // Used to decrease the number of unnecessary GetPosition() query to the controller.
+        /// <summary>
+        /// Current position relative to the homing limit switch (absolute position used by controller). 
+        /// Used to decrease the number of unnecessary GetPosition() query to the controller.
+        /// </summary>
         private int currentAbsPosition;
         public int CurrentAbsPosition
         {
@@ -49,15 +57,19 @@ namespace IQM_TranslationTable
             }
         }
 
-        // Current position relative to the RefPosition.
+        /// <summary>
+        /// Current position relative to the RefPosition.
+        /// </summary>
         public int CurrentRelPosition
         { get; private set; }
 
-        // Number of repetition of the travel profile
-        private int travelRepeat;
-        public int TravelRepeat
+        /// <summary>
+        /// Number of repetition for a profile
+        /// </summary>
+        private int repeat;
+        public int Repeat
         {
-            get { return travelRepeat;}
+            get { return repeat;}
             set 
             {
                 if (value < 1)
@@ -66,12 +78,14 @@ namespace IQM_TranslationTable
                 }
                 else
                 {
-                    travelRepeat = value;
+                    repeat = value;
                 }
             }
         }
 
-        // Record number of the travel profile
+        /// <summary>
+        /// Record number of a travel profile
+        /// </summary>
         private int recordNum;
         public int RecordNum
         {
@@ -90,13 +104,15 @@ namespace IQM_TranslationTable
             }
         }
 
-        // Record number of the homing profile. This is automatically set as recordNum + 1.
+        /// <summary>
+        /// Record number of the homing profile. This is automatically set as recordNum + 1.
+        /// </summary>
         private int homeRecordNum;
 
-        public event EventHandler<MotorStatusEventArg> MotorMoving;
-        public event EventHandler<MotorStatusEventArg> MotorStopped;
-
-        private int stepMode = -1; // Save step mode in a field to reduce necessary GetStepMode() query
+        /// <summary>
+        /// Save step mode in a field to reduce necessary GetStepMode() query
+        /// </summary>
+        private int stepMode = -1;
         public int StepMode
         {
             get 
@@ -108,11 +124,17 @@ namespace IQM_TranslationTable
                 return stepMode;
             }
         }
+        /// <summary>
+        /// Extend the default from ComMotorCommand and update StepMode as well. 
+        /// </summary>
+        /// <param name="stepMode"></param>
+        /// <returns></returns>
         public override bool SetStepMode(int stepMode)
         {
             this.stepMode = stepMode; 
             return base.SetStepMode(stepMode);
         }
+
 
         /* Motor status related commands */
 
@@ -283,7 +305,7 @@ namespace IQM_TranslationTable
             recordSettings["RampType"] = GetRampType(RecordNum);
             recordSettings["Acceleration"] = GetRamp(RecordNum);
             recordSettings["Brake"] = GetBrakeRamp(RecordNum);
-            recordSettings["Repeat"] = TravelRepeat;
+            recordSettings["Repeat"] = Repeat;
             recordSettings["PositionDemand"] = GetSteps(RecordNum);
 
             return recordSettings;
@@ -309,7 +331,11 @@ namespace IQM_TranslationTable
             logger.Log(string.Format("Stopped moving at absolute position: {0}, relative position: {1}",
                 e.AbsPosition, e.RelPosition));
         }
+
+        public event EventHandler<MotorStatusEventArg> MotorMoving;
+        public event EventHandler<MotorStatusEventArg> MotorStopped;
     }
+
 
     public class MotorStatusEventArg : EventArgs
     {

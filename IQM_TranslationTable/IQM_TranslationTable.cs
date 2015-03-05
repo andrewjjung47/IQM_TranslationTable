@@ -50,6 +50,9 @@ namespace IQM_TranslationTable
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
         }
 
+
+        /* Button click handlers */
+
         private void logDirectoryButton_Click(object sender, EventArgs e)
         {
             DialogResult result = logFolderDialog.ShowDialog();
@@ -61,9 +64,6 @@ namespace IQM_TranslationTable
 
         private void InitializeButton_Click(object sender, EventArgs e)
         {
-            // TODO: add a feature to perform measurement without log file.
-            // TODO: test if there is a bug when log folder or file is newly created.
-
             // Ensures a COM port is selected
             if (comDropDown.SelectedItem == null)
             {
@@ -80,7 +80,6 @@ namespace IQM_TranslationTable
             {
                 try
                 {
-                    // Create C:\Temp\IQMLog if it does not exist
                     if (!Utils.EnsurePathExists(logFolderTextBox.Text))
                     {
                         return;
@@ -88,7 +87,10 @@ namespace IQM_TranslationTable
                     log.Path = logFolderTextBox.Text;
                     if (!log.Open())
                     {
-                        MessageBox.Show("Could not creat a log file to the specified path!");
+                        MessageBox.Show("Could not create a log file to the specified path!",
+                            "Unable to Create a Log File",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
                         return;
                     }
 
@@ -103,12 +105,12 @@ namespace IQM_TranslationTable
                     comDropDown.Enabled = false;
                     baudrateDropDown.Enabled = false;
                     motorSettings.DefaultCellStyle.BackColor = SystemColors.Control;
+                    logFolderTextBox.Enabled = false;
 
                     // Start button enabled when both are clicked
                     if (InitializeButtonClick == true && LoadRecordButtonClick == true)
                     {
-                        startButton.Enabled = true;
-                        panel2.Enabled = true;
+                        motorButtonEnable(true);
                     }
 
                     ResetError();
@@ -128,11 +130,13 @@ namespace IQM_TranslationTable
                 comDropDown.Enabled = true;
                 baudrateDropDown.Enabled = true;
                 motorSettings.DefaultCellStyle.BackColor = SystemColors.Window;
-                startButton.Enabled = false;
-                panel2.Enabled = false;
+                motorButtonEnable(false);
+                logFolderTextBox.Enabled = true;
 
                 Status1TextBox.Text = "";
                 Status2TextBox.Text = "";
+
+                log.Close();
             }
         }
 
@@ -154,8 +158,7 @@ namespace IQM_TranslationTable
 
                     if (InitializeButtonClick == true && LoadRecordButtonClick == true)
                     {
-                        startButton.Enabled = true;
-                        panel2.Enabled = true;
+                        motorButtonEnable(true);
                     }
 
                     ResetError();
@@ -173,8 +176,7 @@ namespace IQM_TranslationTable
                 recordNumDropDown.Enabled = true;
                 recordSettings.ReadOnly = false;
                 recordSettings.DefaultCellStyle.BackColor = SystemColors.Window;
-                startButton.Enabled = false;
-                panel2.Enabled = false;
+                motorButtonEnable(false);
 
                 Status1TextBox.Text = "";
                 Status2TextBox.Text = "";
@@ -412,6 +414,17 @@ namespace IQM_TranslationTable
                 motor2StatusLabel.Text = "Profile ended";
                 motor2StatusLabel.BackColor = System.Drawing.SystemColors.GrayText;
             }
+        }
+
+        /// <summary>
+        /// Change the Enabled properties of startButton, motorPanel, and pauseButton
+        /// </summary>
+        /// <param name="state">true or false boolean for Enabled property</param>
+        private void motorButtonEnable(bool state)
+        {
+            startButton.Enabled = state;
+            motorPanel.Enabled = state;
+            pauseButton.Enabled = state;
         }
 
         private void OnApplicationExit(object sender, EventArgs e)

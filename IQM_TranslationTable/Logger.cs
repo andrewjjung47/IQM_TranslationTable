@@ -21,13 +21,25 @@ namespace IQM_TranslationTable
             get { return path; }
             set
             {
-                string date = DateTime.Now.ToString("yyyyMMdd");
-                path = string.Format("{0}\\TransTableLog_{1}.txt", 
-                    value, date);
+                if (value == "")
+                {
+                    path = "";
+                }
+                else
+                {
+                    string date = DateTime.Now.ToString("yyyyMMdd");
+                    path = string.Format("{0}\\TransTableLog_{1}.txt",
+                        value, date);
+                }
             }
         }
 
         private bool open = false;
+        /// <summary>
+        /// Open a stream writer for logging. If Path is an empty string, 
+        /// no stream writer is created.
+        /// </summary>
+        /// <returns></returns>
         public bool Open()
         {
             if (!open)
@@ -35,15 +47,20 @@ namespace IQM_TranslationTable
                 try
                 {
                     if (Path == null) return false;
-                    sw = new StreamWriter(Path, true); // always append to file
-                    open = true;
+                    else if (Path == "") return true;
+                    else
+                    {
+                        sw = new StreamWriter(Path, true); // always append to file
+                        open = true;
+                        Write("Open");
+                        return true;
+                    }
+
                 }
                 catch (Exception)
                 {
                     return false;
                 }
-                Write("Open");
-                return true;
             }
             else
             {

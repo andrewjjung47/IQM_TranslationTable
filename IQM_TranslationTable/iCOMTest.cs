@@ -20,7 +20,6 @@ namespace IQM_TranslationTable
 {
     public partial class iCOMTest : Form
     {
-        //TODO: implement logging for iCOM module.
         //TODO: integreate iCOM module to the main UI and run it in background.
         //      only show details when the user wants it.
         //TODO: clean up iCOMTest.cs

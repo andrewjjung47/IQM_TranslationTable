@@ -117,8 +117,8 @@ namespace IQM_TranslationTable
             motor1.SetRepeat(1);
             motor2.SetRepeat(1);
 
-            motor1.TravelRepeat = form.UI.motor1Record["Repeat"];
-            motor2.TravelRepeat = form.UI.motor2Record["Repeat"];
+            motor1.Repeat = form.UI.motor1Record["Repeat"];
+            motor2.Repeat = form.UI.motor2Record["Repeat"];
 
             // Set travel distance
             motor1.SetSteps(form.UI.motor1Record["PositionDemand"]);
@@ -144,11 +144,11 @@ namespace IQM_TranslationTable
 
             // String array to save position data
 
-            for (int i = 0; i < motor2.TravelRepeat; i++) // loop for motor2 movement
+            for (int i = 0; i < motor2.Repeat; i++) // loop for motor2 movement
             {
                 form.inputFlag = true;
                 String tempPos = motor2.CurrentRelPosition.ToString(); // temporary holder for motor2 position
-                for (int j = 0; j < motor1.TravelRepeat; j++) // loop for motor1 movement
+                for (int j = 0; j < motor1.Repeat; j++) // loop for motor1 movement
                 {
                     WaitEvent();
 
