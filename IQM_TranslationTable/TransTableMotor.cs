@@ -30,8 +30,16 @@ namespace IQM_TranslationTable
         /// <summary>
         /// Reference position set by the user.
         /// </summary>
+        private int refPosition;
         public int RefPosition
-        { get; private set; }
+        {
+            get { return refPosition; }
+            private set
+            {
+                refPosition = value;
+                CurrentRelPosition = currentAbsPosition - RefPosition;
+            }
+        }
         // TODO: figure out why used this
         public int SetRefPosition()
         {

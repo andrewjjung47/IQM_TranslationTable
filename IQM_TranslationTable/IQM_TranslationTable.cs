@@ -532,13 +532,13 @@ namespace IQM_TranslationTable
 
         private void positionInputButton_Click(object sender, EventArgs e)
         {
-            PositionInput positionInput = new PositionInput(this);
+            PositionInput positionInput = new PositionInput(this, log);
             positionInput.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            PositionInput positionInput = new PositionInput(this);
+            PositionInput positionInput = new PositionInput(this, log);
             positionInput.Show();
         }
     }

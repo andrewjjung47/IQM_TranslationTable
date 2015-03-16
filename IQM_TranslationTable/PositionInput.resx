@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="displayRichTextBox.Text" xml:space="preserve">
+    <value>Position input format: 
+a list of position pairs for motor 1 and motor 2, (motor1Pos, motor2Pos), separated by a comma.
+Note: position is in respect to the reference position set by the user.
+
+ex. (0, 0), (1600, 1600), (3200, 1600) 
+
+</value>
+  </data>
 </root>
