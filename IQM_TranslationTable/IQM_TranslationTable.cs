@@ -23,9 +23,6 @@ namespace IQM_TranslationTable
             private set;
         }
 
-        private bool InitializeButtonClick = false;
-        private bool LoadRecordButtonClick = false;
-
         private LogStream log;
 
         public IQM_TranslationTable(LogStream log)
@@ -189,6 +186,7 @@ namespace IQM_TranslationTable
             CSMThread.Start();
         }
 
+        // TODO: implement pause and cancel
         public void pauseButton_Click(object sender, EventArgs e)
         {
             if (CSMThread != null)
@@ -415,6 +413,10 @@ namespace IQM_TranslationTable
                 motor2StatusLabel.BackColor = System.Drawing.SystemColors.GrayText;
             }
         }
+
+        private bool InitializeButtonClick = false;
+        private bool LoadRecordButtonClick = false;
+        private bool PauseButtonClick = false;
 
         /// <summary>
         /// Change the Enabled properties of startButton, motorPanel, and pauseButton
