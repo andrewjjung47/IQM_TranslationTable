@@ -529,5 +529,17 @@ namespace IQM_TranslationTable
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
         }
+
+        private void positionInputButton_Click(object sender, EventArgs e)
+        {
+            PositionInput positionInput = new PositionInput(this);
+            positionInput.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            PositionInput positionInput = new PositionInput(this);
+            positionInput.Show();
+        }
     }
 }

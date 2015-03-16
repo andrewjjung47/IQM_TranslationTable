@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace IQM_TranslationTable
@@ -56,6 +58,25 @@ namespace IQM_TranslationTable
                 }
             }
             else return true;
+        }
+
+        /// <summary>
+        /// Parse a text of a list of position pairs into a list of position pairs.
+        /// </summary>
+        /// <param name="text">A text of a list of position pairs, 
+        /// formatted as (pos1, pos2), (pos3, pos4), and so on</param>
+        /// <returns></returns>
+        public static List<Tuple<int, int>> parsePairList(string text)
+        {
+            // Split the text into a string array of pairs.
+            string[] pairListText = Regex.Split(text, @"\),\s*");
+            List<Tuple<int, int>> pairList= new List<Tuple<int,int>>();
+            foreach (string pairText in pairListText) {
+                // Replace "(" and ")" in a pair, and split the pair.
+                string[] pair = Regex.Split(pairText.Replace("(", "").Replace(")", ""), @",\s*");
+                pairList.Add(new Tuple<int, int> (int.Parse(pair[0]), int.Parse(pair[1])));
+            }
+            return pairList;
         }
     }
 }

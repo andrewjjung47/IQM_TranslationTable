@@ -120,6 +120,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="PositionInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PositionInput.Designer.cs">
+      <DependentUpon>PositionInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="TransTableMotor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="IQM_TranslationTable.resx">
       <DependentUpon>IQM_TranslationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PositionInput.resx">
+      <DependentUpon>PositionInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

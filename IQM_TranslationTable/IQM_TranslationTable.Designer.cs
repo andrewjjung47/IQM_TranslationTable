@@ -105,6 +105,8 @@ namespace IQM_TranslationTable
             this.label15 = new System.Windows.Forms.Label();
             this.motor2LeftButton = new System.Windows.Forms.Button();
             this.motorPanel = new System.Windows.Forms.Panel();
+            this.positionInputButton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -455,6 +457,7 @@ namespace IQM_TranslationTable
             this.groupbox1.AutoSize = true;
             this.groupbox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupbox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupbox1.Controls.Add(this.button3);
             this.groupbox1.Controls.Add(this.button2);
             this.groupbox1.Controls.Add(this.button1);
             this.groupbox1.Controls.Add(this.moveEventButton);
@@ -905,6 +908,7 @@ namespace IQM_TranslationTable
             // motorPanel
             // 
             this.motorPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.motorPanel.Controls.Add(this.positionInputButton);
             this.motorPanel.Controls.Add(this.groupBox3);
             this.motorPanel.Controls.Add(this.groupBox2);
             this.motorPanel.Controls.Add(this.label12);
@@ -915,6 +919,26 @@ namespace IQM_TranslationTable
             this.motorPanel.Name = "motorPanel";
             this.motorPanel.Size = new System.Drawing.Size(266, 364);
             this.motorPanel.TabIndex = 17;
+            // 
+            // positionInputButton
+            // 
+            this.positionInputButton.Location = new System.Drawing.Point(180, 166);
+            this.positionInputButton.Name = "positionInputButton";
+            this.positionInputButton.Size = new System.Drawing.Size(75, 23);
+            this.positionInputButton.TabIndex = 14;
+            this.positionInputButton.Text = "Input";
+            this.positionInputButton.UseVisualStyleBackColor = true;
+            this.positionInputButton.Click += new System.EventHandler(this.positionInputButton_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(487, 41);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 21;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // IQM_TranslationTable
             // 
@@ -1033,6 +1057,8 @@ namespace IQM_TranslationTable
         private Label label15;
         private Button motor2LeftButton;
         private Panel motorPanel;
+        private Button positionInputButton;
+        private Button button3;
     }
 }
 
