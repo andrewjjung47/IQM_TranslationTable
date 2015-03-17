@@ -79,6 +79,12 @@ namespace IQM_TranslationTable
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.posInputTabPage = new System.Windows.Forms.TabPage();
+            this.endButton = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.moveButton = new System.Windows.Forms.Button();
+            this.inputButton = new System.Windows.Forms.Button();
+            this.inputRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.displayRichTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.motor1RelPosTextBox = new System.Windows.Forms.TextBox();
             this.motor1AbsPosTextBox = new System.Windows.Forms.TextBox();
@@ -109,13 +115,6 @@ namespace IQM_TranslationTable
             this.label15 = new System.Windows.Forms.Label();
             this.motor2LeftButton = new System.Windows.Forms.Button();
             this.motorPanel = new System.Windows.Forms.Panel();
-            this.positionInputButton = new System.Windows.Forms.Button();
-            this.displayRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.inputRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.stopButton = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.moveButton = new System.Windows.Forms.Button();
-            this.inputButton = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -623,7 +622,7 @@ namespace IQM_TranslationTable
             // posInputTabPage
             // 
             this.posInputTabPage.BackColor = System.Drawing.SystemColors.Control;
-            this.posInputTabPage.Controls.Add(this.stopButton);
+            this.posInputTabPage.Controls.Add(this.endButton);
             this.posInputTabPage.Controls.Add(this.button4);
             this.posInputTabPage.Controls.Add(this.moveButton);
             this.posInputTabPage.Controls.Add(this.inputButton);
@@ -635,6 +634,63 @@ namespace IQM_TranslationTable
             this.posInputTabPage.Size = new System.Drawing.Size(265, 358);
             this.posInputTabPage.TabIndex = 1;
             this.posInputTabPage.Text = "Position Input";
+            // 
+            // endButton
+            // 
+            this.endButton.Location = new System.Drawing.Point(203, 328);
+            this.endButton.Name = "endButton";
+            this.endButton.Size = new System.Drawing.Size(56, 25);
+            this.endButton.TabIndex = 9;
+            this.endButton.Text = "End";
+            this.endButton.UseVisualStyleBackColor = true;
+            this.endButton.Click += new System.EventHandler(this.endButton_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(141, 328);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(56, 25);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Pause";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // moveButton
+            // 
+            this.moveButton.Location = new System.Drawing.Point(79, 328);
+            this.moveButton.Name = "moveButton";
+            this.moveButton.Size = new System.Drawing.Size(56, 25);
+            this.moveButton.TabIndex = 7;
+            this.moveButton.Text = "Move";
+            this.moveButton.UseVisualStyleBackColor = true;
+            this.moveButton.Click += new System.EventHandler(this.moveButton_Click);
+            // 
+            // inputButton
+            // 
+            this.inputButton.Location = new System.Drawing.Point(3, 328);
+            this.inputButton.Name = "inputButton";
+            this.inputButton.Size = new System.Drawing.Size(70, 25);
+            this.inputButton.TabIndex = 6;
+            this.inputButton.Text = "Read Input";
+            this.inputButton.UseVisualStyleBackColor = true;
+            this.inputButton.Click += new System.EventHandler(this.inputButton_Click);
+            // 
+            // inputRichTextBox
+            // 
+            this.inputRichTextBox.Location = new System.Drawing.Point(0, 239);
+            this.inputRichTextBox.Name = "inputRichTextBox";
+            this.inputRichTextBox.Size = new System.Drawing.Size(265, 82);
+            this.inputRichTextBox.TabIndex = 2;
+            this.inputRichTextBox.Text = "";
+            // 
+            // displayRichTextBox
+            // 
+            this.displayRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.displayRichTextBox.Name = "displayRichTextBox";
+            this.displayRichTextBox.ReadOnly = true;
+            this.displayRichTextBox.Size = new System.Drawing.Size(265, 228);
+            this.displayRichTextBox.TabIndex = 1;
+            this.displayRichTextBox.Text = resources.GetString("displayRichTextBox.Text");
             // 
             // groupBox4
             // 
@@ -951,7 +1007,6 @@ namespace IQM_TranslationTable
             // motorPanel
             // 
             this.motorPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.motorPanel.Controls.Add(this.positionInputButton);
             this.motorPanel.Controls.Add(this.groupBox3);
             this.motorPanel.Controls.Add(this.groupBox2);
             this.motorPanel.Controls.Add(this.label12);
@@ -962,69 +1017,6 @@ namespace IQM_TranslationTable
             this.motorPanel.Name = "motorPanel";
             this.motorPanel.Size = new System.Drawing.Size(266, 364);
             this.motorPanel.TabIndex = 17;
-            // 
-            // positionInputButton
-            // 
-            this.positionInputButton.Location = new System.Drawing.Point(180, 166);
-            this.positionInputButton.Name = "positionInputButton";
-            this.positionInputButton.Size = new System.Drawing.Size(75, 23);
-            this.positionInputButton.TabIndex = 14;
-            this.positionInputButton.Text = "Input";
-            this.positionInputButton.UseVisualStyleBackColor = true;
-            this.positionInputButton.Click += new System.EventHandler(this.positionInputButton_Click);
-            // 
-            // displayRichTextBox
-            // 
-            this.displayRichTextBox.Location = new System.Drawing.Point(0, 0);
-            this.displayRichTextBox.Name = "displayRichTextBox";
-            this.displayRichTextBox.ReadOnly = true;
-            this.displayRichTextBox.Size = new System.Drawing.Size(265, 228);
-            this.displayRichTextBox.TabIndex = 1;
-            this.displayRichTextBox.Text = resources.GetString("displayRichTextBox.Text");
-            // 
-            // inputRichTextBox
-            // 
-            this.inputRichTextBox.Location = new System.Drawing.Point(0, 239);
-            this.inputRichTextBox.Name = "inputRichTextBox";
-            this.inputRichTextBox.Size = new System.Drawing.Size(265, 82);
-            this.inputRichTextBox.TabIndex = 2;
-            this.inputRichTextBox.Text = "";
-            // 
-            // stopButton
-            // 
-            this.stopButton.Location = new System.Drawing.Point(203, 328);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(56, 25);
-            this.stopButton.TabIndex = 9;
-            this.stopButton.Text = "Stop";
-            this.stopButton.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(141, 328);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(56, 25);
-            this.button4.TabIndex = 8;
-            this.button4.Text = "Pause";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // moveButton
-            // 
-            this.moveButton.Location = new System.Drawing.Point(79, 328);
-            this.moveButton.Name = "moveButton";
-            this.moveButton.Size = new System.Drawing.Size(56, 25);
-            this.moveButton.TabIndex = 7;
-            this.moveButton.Text = "Move";
-            this.moveButton.UseVisualStyleBackColor = true;
-            // 
-            // inputButton
-            // 
-            this.inputButton.Location = new System.Drawing.Point(3, 328);
-            this.inputButton.Name = "inputButton";
-            this.inputButton.Size = new System.Drawing.Size(70, 25);
-            this.inputButton.TabIndex = 6;
-            this.inputButton.Text = "Read Input";
-            this.inputButton.UseVisualStyleBackColor = true;
             // 
             // IQM_TranslationTable
             // 
@@ -1150,13 +1142,12 @@ namespace IQM_TranslationTable
         private Label label15;
         private Button motor2LeftButton;
         private Panel motorPanel;
-        private Button positionInputButton;
         private TabControl tabControl1;
         private TabPage settingsTabPage;
         private TabPage posInputTabPage;
         private RichTextBox displayRichTextBox;
         private RichTextBox inputRichTextBox;
-        private Button stopButton;
+        private Button endButton;
         private Button button4;
         private Button moveButton;
         private Button inputButton;

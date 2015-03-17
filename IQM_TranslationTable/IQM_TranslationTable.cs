@@ -22,7 +22,7 @@ namespace IQM_TranslationTable
             get;
             private set;
         }
-
+        private PositionInput positionInput;
         private LogStream log;
 
         public IQM_TranslationTable(LogStream log)
@@ -34,6 +34,8 @@ namespace IQM_TranslationTable
             CSM = new TranslationTable(this, log);
 
             UI = new ControlUI(this, CSM);
+
+            positionInput = new PositionInput(this, log);
 
             CSM.motor1.MotorMoving += motor1_MotorMoving;
             CSM.motor2.MotorMoving += motor2_MotorMoving;
@@ -303,6 +305,73 @@ namespace IQM_TranslationTable
             Motor2RelPosTextBox.Text = "0";
         }
 
+
+        // Position input and sequential manual move related buttons
+
+        Thread moveThread; // for sequential manual move
+
+        private void inputButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                displayRichTextBox.AppendText("Input parsed:\n" +
+                    positionInput.input(inputRichTextBox.Text) + "\n\n");
+            }
+            catch (Exception ex)
+            {
+                displayRichTextBox.AppendText("Error occured while parsing the input string: \n\n" +
+                    ex.ToString() + "\n");
+            }
+
+            moveButton.Enabled = true;
+            pauseButton.Enabled = true;
+        }
+
+        private void moveButton_Click(object sender, EventArgs e)
+        {
+            moveThread = new Thread(moveButtonHandle);
+            moveThread.Start();
+        }
+
+        delegate void moveButtonHandleCallBack();
+        private void moveButtonHandle()
+        {
+            if (displayRichTextBox.InvokeRequired) {
+                moveButtonHandleCallBack d = new moveButtonHandleCallBack(moveButtonHandle);
+                this.Invoke(d, new object[] { });
+            }
+            else {
+                displayRichTextBox.AppendText("Remaining position pair queue:\n" + 
+                    positionInput.move() + "\n\n");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (moveThread != null)
+            {
+                moveThread.Abort();
+            }
+            positionInput.pause();
+        }
+
+        private void endButton_Click(object sender, EventArgs e)
+        {
+            if (moveThread != null)
+            {
+                moveThread.Abort();
+            }
+            positionInput.end();
+
+            displayRichTextBox.AppendText("Stopping measurements.\n\n");
+
+            moveButton.Enabled = false;
+            pauseButton.Enabled = false;
+
+            CSM.OnMotor1ProfileEnded(EventArgs.Empty);
+            CSM.OnMotor2ProfileEnded(EventArgs.Empty);
+        }
+
         delegate void MotorStatusCallBack(object sender, MotorStatusEventArg e);
         delegate void MotorStatusEndCallBack(object sender, EventArgs e);
 
@@ -435,6 +504,8 @@ namespace IQM_TranslationTable
             log.Close();
         }
 
+        
+        // Accessors for the form items
         public ComboBox COMDropDown
         {
             get { return comDropDown; }
@@ -495,6 +566,7 @@ namespace IQM_TranslationTable
             get { return dataGridView1; }
         }
 
+
         public EventWaitHandle _move = new AutoResetEvent(false);
         public bool inputFlag = true;
 
@@ -530,16 +602,12 @@ namespace IQM_TranslationTable
             dataGridView1.Refresh();
         }
 
-        private void positionInputButton_Click(object sender, EventArgs e)
-        {
-            PositionInput positionInput = new PositionInput(this, log);
-            positionInput.Show();
-        }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            PositionInput positionInput = new PositionInput(this, log);
-            positionInput.Show();
-        }
+
+
+
+
+
+
     }
 }
