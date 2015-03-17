@@ -64,6 +64,7 @@ namespace IQM_TranslationTable
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.recordSettings = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,7 +107,9 @@ namespace IQM_TranslationTable
             this.motor2LeftButton = new System.Windows.Forms.Button();
             this.motorPanel = new System.Windows.Forms.Panel();
             this.positionInputButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox6.SuspendLayout();
@@ -120,6 +123,8 @@ namespace IQM_TranslationTable
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.motorPanel.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // InitializeButton
@@ -457,6 +462,7 @@ namespace IQM_TranslationTable
             this.groupbox1.AutoSize = true;
             this.groupbox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupbox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupbox1.Controls.Add(this.tabControl1);
             this.groupbox1.Controls.Add(this.button3);
             this.groupbox1.Controls.Add(this.button2);
             this.groupbox1.Controls.Add(this.button1);
@@ -475,9 +481,19 @@ namespace IQM_TranslationTable
             this.groupbox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupbox1.Location = new System.Drawing.Point(22, 12);
             this.groupbox1.Name = "groupbox1";
-            this.groupbox1.Size = new System.Drawing.Size(811, 84);
+            this.groupbox1.Size = new System.Drawing.Size(811, 477);
             this.groupbox1.TabIndex = 16;
             this.groupbox1.TabStop = false;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(487, 41);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 21;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // recordSettings
             // 
@@ -588,7 +604,7 @@ namespace IQM_TranslationTable
             this.panel1.Controls.Add(this.label23);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.recordSettings);
-            this.panel1.Location = new System.Drawing.Point(22, 106);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(266, 364);
             this.panel1.TabIndex = 15;
@@ -930,27 +946,47 @@ namespace IQM_TranslationTable
             this.positionInputButton.UseVisualStyleBackColor = true;
             this.positionInputButton.Click += new System.EventHandler(this.positionInputButton_Click);
             // 
-            // button3
+            // tabControl1
             // 
-            this.button3.Location = new System.Drawing.Point(487, 41);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 21;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(0, 70);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(273, 388);
+            this.tabControl1.TabIndex = 22;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.panel1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(265, 362);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(192, 74);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // IQM_TranslationTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1169, 496);
+            this.ClientSize = new System.Drawing.Size(1169, 824);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.motorPanel);
             this.Controls.Add(this.groupbox1);
-            this.Controls.Add(this.panel1);
             this.Name = "IQM_TranslationTable";
             this.Text = "IQM Translation Table App";
             this.panel4.ResumeLayout(false);
@@ -975,6 +1011,8 @@ namespace IQM_TranslationTable
             this.groupBox3.PerformLayout();
             this.motorPanel.ResumeLayout(false);
             this.motorPanel.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1059,6 +1097,9 @@ namespace IQM_TranslationTable
         private Panel motorPanel;
         private Button positionInputButton;
         private Button button3;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
     }
 }
 
