@@ -30,6 +30,7 @@ namespace IQM_TranslationTable
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IQM_TranslationTable));
             this.InitializeButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.logFolderDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -64,18 +65,20 @@ namespace IQM_TranslationTable
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.recordSettings = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.settingsTabPage = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.recordNumDropDown = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.motorSettings = new System.Windows.Forms.DataGridView();
             this.MotorSettingMotor1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MotorSettingMotor2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label5 = new System.Windows.Forms.Label();
-            this.recordNumDropDown = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.recordSettings = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.posInputTabPage = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.motor1RelPosTextBox = new System.Windows.Forms.TextBox();
             this.motor1AbsPosTextBox = new System.Windows.Forms.TextBox();
@@ -107,24 +110,28 @@ namespace IQM_TranslationTable
             this.motor2LeftButton = new System.Windows.Forms.Button();
             this.motorPanel = new System.Windows.Forms.Panel();
             this.positionInputButton = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.displayRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.inputRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.moveButton = new System.Windows.Forms.Button();
+            this.inputButton = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupbox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.recordSettings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.motorSettings)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.settingsTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.motorSettings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recordSettings)).BeginInit();
+            this.posInputTabPage.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.motorPanel.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // InitializeButton
@@ -321,7 +328,7 @@ namespace IQM_TranslationTable
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(160, 41);
+            this.label4.Location = new System.Drawing.Point(19, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 15);
             this.label4.TabIndex = 10;
@@ -331,7 +338,7 @@ namespace IQM_TranslationTable
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(160, 15);
+            this.label3.Location = new System.Drawing.Point(19, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 15);
             this.label3.TabIndex = 9;
@@ -341,7 +348,7 @@ namespace IQM_TranslationTable
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 40);
+            this.label2.Location = new System.Drawing.Point(14, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 15);
             this.label2.TabIndex = 2;
@@ -352,7 +359,7 @@ namespace IQM_TranslationTable
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 15);
+            this.label1.Location = new System.Drawing.Point(11, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 15);
             this.label1.TabIndex = 1;
@@ -360,7 +367,7 @@ namespace IQM_TranslationTable
             // 
             // Status1TextBox
             // 
-            this.Status1TextBox.Location = new System.Drawing.Point(247, 15);
+            this.Status1TextBox.Location = new System.Drawing.Point(106, 24);
             this.Status1TextBox.Name = "Status1TextBox";
             this.Status1TextBox.ReadOnly = true;
             this.Status1TextBox.Size = new System.Drawing.Size(91, 20);
@@ -368,7 +375,7 @@ namespace IQM_TranslationTable
             // 
             // Status2TextBox
             // 
-            this.Status2TextBox.Location = new System.Drawing.Point(247, 40);
+            this.Status2TextBox.Location = new System.Drawing.Point(106, 49);
             this.Status2TextBox.Name = "Status2TextBox";
             this.Status2TextBox.ReadOnly = true;
             this.Status2TextBox.Size = new System.Drawing.Size(91, 20);
@@ -376,9 +383,9 @@ namespace IQM_TranslationTable
             // 
             // logFolderTextBox
             // 
-            this.logFolderTextBox.Location = new System.Drawing.Point(440, 15);
+            this.logFolderTextBox.Location = new System.Drawing.Point(219, 15);
             this.logFolderTextBox.Name = "logFolderTextBox";
-            this.logFolderTextBox.Size = new System.Drawing.Size(333, 20);
+            this.logFolderTextBox.Size = new System.Drawing.Size(266, 20);
             this.logFolderTextBox.TabIndex = 13;
             this.logFolderTextBox.Text = "C:\\Temp\\IQMLogs";
             // 
@@ -386,7 +393,7 @@ namespace IQM_TranslationTable
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(370, 15);
+            this.label7.Location = new System.Drawing.Point(152, 15);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 15);
             this.label7.TabIndex = 14;
@@ -395,7 +402,7 @@ namespace IQM_TranslationTable
             // logDirectoryButton
             // 
             this.logDirectoryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logDirectoryButton.Location = new System.Drawing.Point(778, 14);
+            this.logDirectoryButton.Location = new System.Drawing.Point(490, 14);
             this.logDirectoryButton.Name = "logDirectoryButton";
             this.logDirectoryButton.Size = new System.Drawing.Size(27, 22);
             this.logDirectoryButton.TabIndex = 15;
@@ -407,7 +414,7 @@ namespace IQM_TranslationTable
             // 
             this.comDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comDropDown.FormattingEnabled = true;
-            this.comDropDown.Location = new System.Drawing.Point(70, 15);
+            this.comDropDown.Location = new System.Drawing.Point(75, 12);
             this.comDropDown.Name = "comDropDown";
             this.comDropDown.Size = new System.Drawing.Size(60, 21);
             this.comDropDown.TabIndex = 16;
@@ -422,14 +429,14 @@ namespace IQM_TranslationTable
             "38400",
             "57600",
             "115200"});
-            this.baudrateDropDown.Location = new System.Drawing.Point(70, 40);
+            this.baudrateDropDown.Location = new System.Drawing.Point(75, 42);
             this.baudrateDropDown.Name = "baudrateDropDown";
             this.baudrateDropDown.Size = new System.Drawing.Size(60, 21);
             this.baudrateDropDown.TabIndex = 17;
             // 
             // moveEventButton
             // 
-            this.moveEventButton.Location = new System.Drawing.Point(730, 42);
+            this.moveEventButton.Location = new System.Drawing.Point(442, 42);
             this.moveEventButton.Name = "moveEventButton";
             this.moveEventButton.Size = new System.Drawing.Size(75, 23);
             this.moveEventButton.TabIndex = 18;
@@ -439,7 +446,7 @@ namespace IQM_TranslationTable
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(649, 42);
+            this.button1.Location = new System.Drawing.Point(361, 42);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 19;
@@ -449,7 +456,7 @@ namespace IQM_TranslationTable
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(568, 42);
+            this.button2.Location = new System.Drawing.Point(280, 42);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 20;
@@ -459,11 +466,8 @@ namespace IQM_TranslationTable
             // 
             // groupbox1
             // 
-            this.groupbox1.AutoSize = true;
             this.groupbox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupbox1.BackColor = System.Drawing.SystemColors.Control;
-            this.groupbox1.Controls.Add(this.tabControl1);
-            this.groupbox1.Controls.Add(this.button3);
             this.groupbox1.Controls.Add(this.button2);
             this.groupbox1.Controls.Add(this.button1);
             this.groupbox1.Controls.Add(this.moveEventButton);
@@ -472,78 +476,68 @@ namespace IQM_TranslationTable
             this.groupbox1.Controls.Add(this.logDirectoryButton);
             this.groupbox1.Controls.Add(this.label7);
             this.groupbox1.Controls.Add(this.logFolderTextBox);
-            this.groupbox1.Controls.Add(this.Status2TextBox);
-            this.groupbox1.Controls.Add(this.Status1TextBox);
             this.groupbox1.Controls.Add(this.label1);
             this.groupbox1.Controls.Add(this.label2);
-            this.groupbox1.Controls.Add(this.label3);
-            this.groupbox1.Controls.Add(this.label4);
             this.groupbox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupbox1.Location = new System.Drawing.Point(22, 12);
+            this.groupbox1.Location = new System.Drawing.Point(309, 12);
             this.groupbox1.Name = "groupbox1";
-            this.groupbox1.Size = new System.Drawing.Size(811, 477);
+            this.groupbox1.Size = new System.Drawing.Size(528, 79);
             this.groupbox1.TabIndex = 16;
             this.groupbox1.TabStop = false;
             // 
-            // button3
+            // tabControl1
             // 
-            this.button3.Location = new System.Drawing.Point(487, 41);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 21;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.tabControl1.Controls.Add(this.settingsTabPage);
+            this.tabControl1.Controls.Add(this.posInputTabPage);
+            this.tabControl1.Location = new System.Drawing.Point(22, 86);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(273, 384);
+            this.tabControl1.TabIndex = 22;
             // 
-            // recordSettings
+            // settingsTabPage
             // 
-            this.recordSettings.AllowUserToAddRows = false;
-            this.recordSettings.AllowUserToDeleteRows = false;
-            this.recordSettings.AllowUserToResizeColumns = false;
-            this.recordSettings.AllowUserToResizeRows = false;
-            this.recordSettings.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-            this.recordSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.recordSettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4});
-            this.recordSettings.Location = new System.Drawing.Point(-2, 159);
-            this.recordSettings.Name = "recordSettings";
-            this.recordSettings.RowHeadersWidth = 130;
-            this.recordSettings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.recordSettings.Size = new System.Drawing.Size(264, 201);
-            this.recordSettings.TabIndex = 8;
+            this.settingsTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsTabPage.Controls.Add(this.panel1);
+            this.settingsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.settingsTabPage.Name = "settingsTabPage";
+            this.settingsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.settingsTabPage.Size = new System.Drawing.Size(265, 358);
+            this.settingsTabPage.TabIndex = 0;
+            this.settingsTabPage.Text = "Settings";
             // 
-            // dataGridViewTextBoxColumn3
+            // panel1
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Motor1";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn3.Width = 66;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.recordNumDropDown);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.motorSettings);
+            this.panel1.Controls.Add(this.label23);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.recordSettings);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(266, 364);
+            this.panel1.TabIndex = 15;
             // 
-            // dataGridViewTextBoxColumn4
+            // recordNumDropDown
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Motor2";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 66;
+            this.recordNumDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.recordNumDropDown.FormattingEnabled = true;
+            this.recordNumDropDown.Location = new System.Drawing.Point(201, 132);
+            this.recordNumDropDown.Name = "recordNumDropDown";
+            this.recordNumDropDown.Size = new System.Drawing.Size(60, 21);
+            this.recordNumDropDown.TabIndex = 18;
             // 
-            // label8
+            // label5
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(4, 117);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(104, 16);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Record Settings";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(110, 134);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(85, 13);
-            this.label23.TabIndex = 9;
-            this.label23.Text = "Record Number:";
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(4, 4);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(93, 16);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Motor Settings";
             // 
             // motorSettings
             // 
@@ -576,38 +570,71 @@ namespace IQM_TranslationTable
             this.MotorSettingMotor2.Name = "MotorSettingMotor2";
             this.MotorSettingMotor2.Width = 66;
             // 
-            // label5
+            // label23
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(4, 4);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 16);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Motor Settings";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(114, 134);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(85, 13);
+            this.label23.TabIndex = 9;
+            this.label23.Text = "Record Number:";
             // 
-            // recordNumDropDown
+            // label8
             // 
-            this.recordNumDropDown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.recordNumDropDown.FormattingEnabled = true;
-            this.recordNumDropDown.Location = new System.Drawing.Point(197, 132);
-            this.recordNumDropDown.Name = "recordNumDropDown";
-            this.recordNumDropDown.Size = new System.Drawing.Size(60, 21);
-            this.recordNumDropDown.TabIndex = 18;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(4, 117);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 16);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Record Settings";
             // 
-            // panel1
+            // recordSettings
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.recordNumDropDown);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.motorSettings);
-            this.panel1.Controls.Add(this.label23);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.recordSettings);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 364);
-            this.panel1.TabIndex = 15;
+            this.recordSettings.AllowUserToAddRows = false;
+            this.recordSettings.AllowUserToDeleteRows = false;
+            this.recordSettings.AllowUserToResizeColumns = false;
+            this.recordSettings.AllowUserToResizeRows = false;
+            this.recordSettings.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
+            this.recordSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.recordSettings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.recordSettings.Location = new System.Drawing.Point(-2, 155);
+            this.recordSettings.Name = "recordSettings";
+            this.recordSettings.RowHeadersWidth = 130;
+            this.recordSettings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.recordSettings.Size = new System.Drawing.Size(264, 201);
+            this.recordSettings.TabIndex = 8;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Motor1";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn3.Width = 66;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Motor2";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 66;
+            // 
+            // posInputTabPage
+            // 
+            this.posInputTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.posInputTabPage.Controls.Add(this.stopButton);
+            this.posInputTabPage.Controls.Add(this.button4);
+            this.posInputTabPage.Controls.Add(this.moveButton);
+            this.posInputTabPage.Controls.Add(this.inputButton);
+            this.posInputTabPage.Controls.Add(this.inputRichTextBox);
+            this.posInputTabPage.Controls.Add(this.displayRichTextBox);
+            this.posInputTabPage.Location = new System.Drawing.Point(4, 22);
+            this.posInputTabPage.Name = "posInputTabPage";
+            this.posInputTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.posInputTabPage.Size = new System.Drawing.Size(265, 358);
+            this.posInputTabPage.TabIndex = 1;
+            this.posInputTabPage.Text = "Position Input";
             // 
             // groupBox4
             // 
@@ -946,47 +973,74 @@ namespace IQM_TranslationTable
             this.positionInputButton.UseVisualStyleBackColor = true;
             this.positionInputButton.Click += new System.EventHandler(this.positionInputButton_Click);
             // 
-            // tabControl1
+            // displayRichTextBox
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 70);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(273, 388);
-            this.tabControl1.TabIndex = 22;
+            this.displayRichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.displayRichTextBox.Name = "displayRichTextBox";
+            this.displayRichTextBox.ReadOnly = true;
+            this.displayRichTextBox.Size = new System.Drawing.Size(265, 228);
+            this.displayRichTextBox.TabIndex = 1;
+            this.displayRichTextBox.Text = resources.GetString("displayRichTextBox.Text");
             // 
-            // tabPage1
+            // inputRichTextBox
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(265, 362);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.inputRichTextBox.Location = new System.Drawing.Point(0, 239);
+            this.inputRichTextBox.Name = "inputRichTextBox";
+            this.inputRichTextBox.Size = new System.Drawing.Size(265, 82);
+            this.inputRichTextBox.TabIndex = 2;
+            this.inputRichTextBox.Text = "";
             // 
-            // tabPage2
+            // stopButton
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.stopButton.Location = new System.Drawing.Point(203, 328);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(56, 25);
+            this.stopButton.TabIndex = 9;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(141, 328);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(56, 25);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Pause";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // moveButton
+            // 
+            this.moveButton.Location = new System.Drawing.Point(79, 328);
+            this.moveButton.Name = "moveButton";
+            this.moveButton.Size = new System.Drawing.Size(56, 25);
+            this.moveButton.TabIndex = 7;
+            this.moveButton.Text = "Move";
+            this.moveButton.UseVisualStyleBackColor = true;
+            // 
+            // inputButton
+            // 
+            this.inputButton.Location = new System.Drawing.Point(3, 328);
+            this.inputButton.Name = "inputButton";
+            this.inputButton.Size = new System.Drawing.Size(70, 25);
+            this.inputButton.TabIndex = 6;
+            this.inputButton.Text = "Read Input";
+            this.inputButton.UseVisualStyleBackColor = true;
             // 
             // IQM_TranslationTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 824);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.motorPanel);
             this.Controls.Add(this.groupbox1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.Status1TextBox);
+            this.Controls.Add(this.Status2TextBox);
+            this.Controls.Add(this.label4);
             this.Name = "IQM_TranslationTable";
             this.Text = "IQM Translation Table App";
             this.panel4.ResumeLayout(false);
@@ -997,10 +1051,13 @@ namespace IQM_TranslationTable
             this.panel3.PerformLayout();
             this.groupbox1.ResumeLayout(false);
             this.groupbox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.recordSettings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.motorSettings)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.settingsTabPage.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.motorSettings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.recordSettings)).EndInit();
+            this.posInputTabPage.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -1011,8 +1068,6 @@ namespace IQM_TranslationTable
             this.groupBox3.PerformLayout();
             this.motorPanel.ResumeLayout(false);
             this.motorPanel.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1096,10 +1151,15 @@ namespace IQM_TranslationTable
         private Button motor2LeftButton;
         private Panel motorPanel;
         private Button positionInputButton;
-        private Button button3;
         private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage settingsTabPage;
+        private TabPage posInputTabPage;
+        private RichTextBox displayRichTextBox;
+        private RichTextBox inputRichTextBox;
+        private Button stopButton;
+        private Button button4;
+        private Button moveButton;
+        private Button inputButton;
     }
 }
 

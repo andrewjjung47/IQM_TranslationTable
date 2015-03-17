@@ -42,7 +42,7 @@
             this.displayRichTextBox.Location = new System.Drawing.Point(13, 13);
             this.displayRichTextBox.Name = "displayRichTextBox";
             this.displayRichTextBox.ReadOnly = true;
-            this.displayRichTextBox.Size = new System.Drawing.Size(501, 102);
+            this.displayRichTextBox.Size = new System.Drawing.Size(276, 102);
             this.displayRichTextBox.TabIndex = 0;
             this.displayRichTextBox.Text = resources.GetString("displayRichTextBox.Text");
             // 
@@ -50,7 +50,7 @@
             // 
             this.inputRichTextBox.Location = new System.Drawing.Point(13, 122);
             this.inputRichTextBox.Name = "inputRichTextBox";
-            this.inputRichTextBox.Size = new System.Drawing.Size(501, 97);
+            this.inputRichTextBox.Size = new System.Drawing.Size(276, 97);
             this.inputRichTextBox.TabIndex = 1;
             this.inputRichTextBox.Text = "";
             // 
