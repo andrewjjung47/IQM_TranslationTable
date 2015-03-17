@@ -329,20 +329,20 @@ namespace IQM_TranslationTable
 
         private void moveButton_Click(object sender, EventArgs e)
         {
-            moveThread = new Thread(moveButtonHandle);
+            moveThread = new Thread(() => moveButtonUpdate(positionInput.move()));
             moveThread.Start();
         }
 
-        delegate void moveButtonHandleCallBack();
-        private void moveButtonHandle()
+        delegate void moveButtonUpdateCallBack(string outputText);
+        private void moveButtonUpdate(string outputText)
         {
             if (displayRichTextBox.InvokeRequired) {
-                moveButtonHandleCallBack d = new moveButtonHandleCallBack(moveButtonHandle);
-                this.Invoke(d, new object[] { });
+                moveButtonUpdateCallBack d = new moveButtonUpdateCallBack(moveButtonUpdate);
+                this.Invoke(d, new object[] { outputText });
             }
             else {
                 displayRichTextBox.AppendText("Remaining position pair queue:\n" + 
-                    positionInput.move() + "\n\n");
+                    outputText + "\n\n");
             }
         }
 
