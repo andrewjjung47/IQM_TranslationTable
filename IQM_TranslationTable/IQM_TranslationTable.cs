@@ -114,7 +114,7 @@ namespace IQM_TranslationTable
 
                     ResetError();
                 }
-                catch (SerialCommunicationException)
+                catch (CommandsException)
                 {
                     ReportError();
                 }
@@ -184,7 +184,7 @@ namespace IQM_TranslationTable
 
                     ResetError();
                 }
-                catch (SerialCommunicationException)
+                catch (CommandsException)
                 {
                     ReportError();
                 }
