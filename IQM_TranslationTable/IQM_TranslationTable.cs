@@ -160,6 +160,28 @@ namespace IQM_TranslationTable
                         motorButtonEnable(true);
                     }
 
+                    if (CSM.motor1.IsReferenced())
+                    {
+                        motor1AbsPosTextBox.Text = CSM.motor1.QueryCurrentAbsPosition().ToString();
+                        motor1RelPosTextBox.Text = CSM.motor1.CurrentRelPosition.ToString();
+                    }
+                    else
+                    {
+                        motor1AbsPosTextBox.Text = "homing required";
+                        motor1RelPosTextBox.Text = "homing required";
+                    }
+
+                    if (CSM.motor2.IsReferenced())
+                    {
+                        motor2AbsPosTextBox.Text = CSM.motor2.QueryCurrentAbsPosition().ToString();
+                        motor2RelPosTextBox.Text = CSM.motor2.CurrentRelPosition.ToString();
+                    }
+                    else
+                    {
+                        motor2AbsPosTextBox.Text = "homing required";
+                        motor2RelPosTextBox.Text = "homing required";
+                    }
+
                     ResetError();
                 }
                 catch (SerialCommunicationException)
@@ -601,13 +623,5 @@ namespace IQM_TranslationTable
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
         }
-
-
-
-
-
-
-
-
     }
 }

@@ -714,7 +714,6 @@ namespace IQM_TranslationTable
             this.motor1RelPosTextBox.ReadOnly = true;
             this.motor1RelPosTextBox.Size = new System.Drawing.Size(91, 20);
             this.motor1RelPosTextBox.TabIndex = 13;
-            this.motor1RelPosTextBox.Text = "homing required";
             // 
             // motor1AbsPosTextBox
             // 
@@ -724,7 +723,6 @@ namespace IQM_TranslationTable
             this.motor1AbsPosTextBox.ReadOnly = true;
             this.motor1AbsPosTextBox.Size = new System.Drawing.Size(91, 20);
             this.motor1AbsPosTextBox.TabIndex = 12;
-            this.motor1AbsPosTextBox.Text = "homing required";
             // 
             // label16
             // 
@@ -768,7 +766,6 @@ namespace IQM_TranslationTable
             this.motor2RelPosTextBox.ReadOnly = true;
             this.motor2RelPosTextBox.Size = new System.Drawing.Size(91, 20);
             this.motor2RelPosTextBox.TabIndex = 14;
-            this.motor2RelPosTextBox.Text = "homing required";
             // 
             // motor2AbsPosTextBox
             // 
@@ -778,7 +775,6 @@ namespace IQM_TranslationTable
             this.motor2AbsPosTextBox.ReadOnly = true;
             this.motor2AbsPosTextBox.Size = new System.Drawing.Size(91, 20);
             this.motor2AbsPosTextBox.TabIndex = 13;
-            this.motor2AbsPosTextBox.Text = "homing required";
             // 
             // label17
             // 

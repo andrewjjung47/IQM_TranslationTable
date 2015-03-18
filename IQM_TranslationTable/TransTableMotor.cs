@@ -22,15 +22,9 @@ namespace IQM_TranslationTable
         public MotorStatus status = MotorStatus.Stopped; // initial state
 
         /// <summary>
-        /// Whether the table has been homed and aware of its position or not
-        /// </summary>
-        public bool Referenced
-        { get; private set; }
-
-        /// <summary>
         /// Reference position set by the user.
         /// </summary>
-        private int refPosition;
+        private int refPosition = 0;
         public int RefPosition
         {
             get { return refPosition; }
@@ -215,7 +209,7 @@ namespace IQM_TranslationTable
 
             ChooseRecord(homeRecordNum);
 
-            if (Referenced) // Previously referenced and current position is known
+            if (IsReferenced()) // Previously referenced and current position is known
             {
                 // 1cm = 1600 steps for full step mode.
 
@@ -279,8 +273,6 @@ namespace IQM_TranslationTable
                 StartTravelProfile(); // start the slow reference run
 
                 WaitMotor();
-
-                Referenced = true;
             }
             Thread.Sleep(500); // give 500ms pause after the homing.
 
