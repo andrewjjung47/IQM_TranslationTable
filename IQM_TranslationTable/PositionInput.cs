@@ -15,8 +15,18 @@ namespace IQM_TranslationTable
     {
         private IQM_TranslationTable form;
         private LogStream log;
-        private List<Tuple<int, int>> pairList;
         private TransTableMotor motor1, motor2;
+        public List<Tuple<int, int>> PairList
+        {
+            get;
+            private set;
+        }
+        public int NumItems
+        {
+            get;
+            private set;
+        }
+        
 
         public PositionInput(IQM_TranslationTable form, LogStream log)
         {
@@ -29,13 +39,14 @@ namespace IQM_TranslationTable
 
         public string input(string text)
         {
-            pairList = Utils.parsePairListText(text); 
-            return Utils.parsePairList(pairList);
+            PairList = Utils.parsePairListText(text);
+            NumItems = PairList.Count;
+            return Utils.parsePairList(PairList);
         }
 
         public string move()
         {
-            Tuple<int, int> pair = pairList[0];
+            Tuple<int, int> pair = PairList[0];
 
             motor1.SetSteps(pair.Item1 - motor1.CurrentRelPosition);
             motor2.SetSteps(pair.Item2 - motor2.CurrentRelPosition);
@@ -48,9 +59,9 @@ namespace IQM_TranslationTable
             motor2.StartTravelProfile();
             motor2.WaitMotor();
 
-            pairList.RemoveAt(0);
+            PairList.RemoveAt(0);
 
-            return Utils.parsePairList(pairList);
+            return Utils.parsePairList(PairList);
         }
 
         public void pause()
@@ -64,7 +75,7 @@ namespace IQM_TranslationTable
             motor1.StopTravelProfile();
             motor2.StopTravelProfile();
 
-            pairList = null;
+            PairList = null;
         }
     }
 }

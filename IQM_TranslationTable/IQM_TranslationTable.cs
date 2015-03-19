@@ -336,8 +336,18 @@ namespace IQM_TranslationTable
         {
             try
             {
-                displayRichTextBox.AppendText("Input parsed:\n" +
-                    positionInput.input(inputRichTextBox.Text) + "\n\n");
+                displayRichTextBox.AppendText(String.Format(
+                    "{0} position input parsed:\n{1}\n\n", 
+                    positionInput.NumItems, positionInput.input(inputRichTextBox.Text)));
+
+                // Update all the input position to MeasurementDataGridView
+                foreach (Tuple<int, int> pair in positionInput.PairList)
+                {
+                    int index = MeasurementDataGridView.Rows.Add();
+                    DataGridViewRow row = MeasurementDataGridView.Rows[index];
+                    row.Cells[0].Value = pair.Item1;
+                    row.Cells[1].Value = pair.Item2;
+                }
             }
             catch (Exception ex)
             {
@@ -358,13 +368,16 @@ namespace IQM_TranslationTable
         delegate void moveButtonUpdateCallBack(string outputText);
         private void moveButtonUpdate(string outputText)
         {
-            if (displayRichTextBox.InvokeRequired) {
+            if (displayRichTextBox.InvokeRequired || MeasurementDataGridView.InvokeRequired) {
                 moveButtonUpdateCallBack d = new moveButtonUpdateCallBack(moveButtonUpdate);
                 this.Invoke(d, new object[] { outputText });
             }
             else {
                 displayRichTextBox.AppendText("Remaining position pair queue:\n" + 
                     outputText + "\n\n");
+                DataGridViewRow row = MeasurementDataGridView.Rows[positionInput.NumItems
+                    - positionInput.PairList.Count - 1];
+                row.HeaderCell.Value = DateTime.Now.ToString("HH:mm:ss");
             }
         }
 
