@@ -162,7 +162,7 @@ namespace IQM_TranslationTable
 
                     if (CSM.motor1.IsReferenced())
                     {
-                        motor1AbsPosTextBox.Text = CSM.motor1.QueryCurrentAbsPosition().ToString();
+                        motor1AbsPosTextBox.Text = CSM.motor1.CurrentAbsPosition.ToString();
                         motor1RelPosTextBox.Text = CSM.motor1.CurrentRelPosition.ToString();
                     }
                     else
@@ -173,7 +173,7 @@ namespace IQM_TranslationTable
 
                     if (CSM.motor2.IsReferenced())
                     {
-                        motor2AbsPosTextBox.Text = CSM.motor2.QueryCurrentAbsPosition().ToString();
+                        motor2AbsPosTextBox.Text = CSM.motor2.CurrentAbsPosition.ToString();
                         motor2RelPosTextBox.Text = CSM.motor2.CurrentRelPosition.ToString();
                     }
                     else

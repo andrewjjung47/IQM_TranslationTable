@@ -51,11 +51,11 @@ namespace IQM_TranslationTable
         private int currentAbsPosition;
         public int CurrentAbsPosition
         {
-            get { return currentAbsPosition; }
-            private set
+            get 
             {
-                currentAbsPosition = value;
+                currentAbsPosition = -GetPosition(); // (-) to keep CurrentAbsPosition positive
                 CurrentRelPosition = currentAbsPosition - RefPosition;
+                return currentAbsPosition;
             }
         }
 
@@ -140,13 +140,6 @@ namespace IQM_TranslationTable
 
         /* Motor status related commands */
 
-        public int QueryCurrentAbsPosition()
-        {
-            // Query motor's current position. 
-
-            CurrentAbsPosition = -GetPosition(); // (-) to keep CurrentAbsPosition positive
-            return CurrentAbsPosition;
-        }
 
         /// <summary>
         /// Wait for motor to finish movement. 
@@ -155,11 +148,11 @@ namespace IQM_TranslationTable
         {
             while (GetStatusByte() % 2 == 0)
             {
-                OnMotorMoving(new MotorStatusEventArg(QueryCurrentAbsPosition(), CurrentRelPosition));
+                OnMotorMoving(new MotorStatusEventArg(CurrentAbsPosition, CurrentRelPosition));
                 Thread.Sleep(50);
             }
 
-            OnMotorStopped(new MotorStatusEventArg(QueryCurrentAbsPosition(), CurrentRelPosition));
+            OnMotorStopped(new MotorStatusEventArg(CurrentAbsPosition, CurrentRelPosition));
             Thread.Sleep(100); // gives 100ms break between movements
         }
 
