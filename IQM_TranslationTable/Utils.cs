@@ -62,7 +62,7 @@ namespace IQM_TranslationTable
         }
 
         /// <summary>
-        /// Parse a text of a list of position pairs into a list of position pairs.
+        /// Parse a string representation of a list of position pairs into a list of position pairs.
         /// </summary>
         /// <param name="text">A text of a list of position pairs, 
         /// formatted as (pos1, pos2), (pos3, pos4), and so on</param>
@@ -80,6 +80,11 @@ namespace IQM_TranslationTable
             return pairList;
         }
 
+        /// <summary>
+        /// Parse a list of position pairs into a string representation of a list of position pairs.
+        /// </summary>
+        /// <param name="pairList">A list of position pairs that needs to be represented in a string</param>
+        /// <returns></returns>
         public static string parsePairList(List<Tuple<int, int>> pairList)
         {
             StringBuilder builder = new StringBuilder();
@@ -88,6 +93,28 @@ namespace IQM_TranslationTable
                 builder.Append(pair.ToString()).Append(", ");
             }
             return builder.ToString();
+        }
+
+        /// <summary>
+        /// Converts steps to distance in cm. 
+        /// 1600 steps in full step mode converts to 1cm.
+        /// </summary>
+        /// <param name="steps"></param>
+        /// <param name="stepSize"></param>
+        /// <returns></returns>
+        public static double ConvertStepsToDistance(int steps, int stepMode) 
+        {
+            return Math.Round((double)steps / (stepMode * 1600), 2);
+        }
+
+        /// <summary>
+        /// Converts distance in cm to steps.
+        /// 1cm converts to 1600 steps in full step mode.
+        /// </summary>
+        /// <returns></returns>
+        public static int ConvertDistanceToSteps(double distance, int stepMode)
+        {
+            return (int)(distance * 1600 * stepMode);
         }
     }
 }

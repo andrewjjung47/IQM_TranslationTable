@@ -148,11 +148,13 @@ namespace IQM_TranslationTable
         {
             while (GetStatusByte() % 2 == 0)
             {
-                OnMotorMoving(new MotorStatusEventArg(CurrentAbsPosition, CurrentRelPosition));
+                OnMotorMoving(new MotorStatusEventArg(Utils.ConvertStepsToDistance(CurrentAbsPosition, stepMode), 
+                    Utils.ConvertStepsToDistance(CurrentRelPosition, stepMode)));
                 Thread.Sleep(50);
             }
 
-            OnMotorStopped(new MotorStatusEventArg(CurrentAbsPosition, CurrentRelPosition));
+            OnMotorStopped(new MotorStatusEventArg(Utils.ConvertStepsToDistance(CurrentAbsPosition, stepMode), 
+                Utils.ConvertStepsToDistance(CurrentRelPosition, stepMode)));
             Thread.Sleep(100); // gives 100ms break between movements
         }
 
@@ -332,10 +334,10 @@ namespace IQM_TranslationTable
 
     public class MotorStatusEventArg : EventArgs
     {
-        public readonly int AbsPosition;
-        public readonly int RelPosition;
+        public readonly double AbsPosition;
+        public readonly double RelPosition;
 
-        public MotorStatusEventArg(int absPosition, int relPosition)
+        public MotorStatusEventArg(double absPosition, double relPosition)
         {
             AbsPosition = absPosition;
             RelPosition = relPosition;
