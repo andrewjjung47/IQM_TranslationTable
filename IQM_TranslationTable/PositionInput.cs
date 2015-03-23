@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace IQM_TranslationTable
 {
-    class PositionInput
+    public class PositionInput
     {
         private IQM_TranslationTable form;
         private LogStream log;

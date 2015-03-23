@@ -22,7 +22,7 @@ namespace IQM_TranslationTable
             get;
             private set;
         }
-        private PositionInput positionInput;
+        public PositionInput positionInput;
         private LogStream log;
 
         public IQM_TranslationTable(LogStream log)

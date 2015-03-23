@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Forms;
 using Commands;
 
 namespace IQM_TranslationTable
@@ -137,38 +138,60 @@ namespace IQM_TranslationTable
 
         public void CSM()
         {
+            DialogResult result = DialogResult.No;
+
+            if (form.positionInput.PairList.Count > 0)
+            {
+                // TODO: message box for asking to use stored position pair, if ok, then use the stored
+                // position pair.
+                result = MessageBox.Show("Use stored position pairs for CSM?",
+                    "Using Stored Position Pairs",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+            }
+
             logger.Log("Start CSM");
 
             motor1.Home();
             motor2.Home();
 
-            // String array to save position data
-
-            for (int i = 0; i < motor2.Repeat; i++) // loop for motor2 movement
+            if (result == DialogResult.Yes)
             {
-                form.inputFlag = true;
-                String tempPos = motor2.CurrentRelPosition.ToString(); // temporary holder for motor2 position
-                for (int j = 0; j < motor1.Repeat; j++) // loop for motor1 movement
+                while (form.positionInput.PairList.Count > 0)
                 {
+                    form.inputFlag = true;
                     WaitEvent();
 
-                    motor1.StartTravelProfile();
-                    motor1.WaitMotor();
-
-                    Thread.Sleep(1000);
-
+                    form.positionInput.move();
+                }
+            }
+            else
+            {
+                for (int i = 0; i < motor2.Repeat; i++) // loop for motor2 movement
+                {
                     form.inputFlag = true;
+                    for (int j = 0; j < motor1.Repeat; j++) // loop for motor1 movement
+                    {
+                        WaitEvent();
+
+                        motor1.StartTravelProfile();
+                        motor1.WaitMotor();
+
+                        Thread.Sleep(1000);
+
+                        form.inputFlag = true;
+                    }
+
+                    WaitEvent();
+
+                    motor2.StartTravelProfile();
+                    motor2.WaitMotor();
+
+                    motor1.Home();
                 }
 
-                WaitEvent();
-
-                motor2.StartTravelProfile();
-                motor2.WaitMotor();
-                
-                motor1.Home();
+                motor2.Home();
             }
-
-            motor2.Home();
 
             OnMotor1ProfileEnded(EventArgs.Empty);
             OnMotor2ProfileEnded(EventArgs.Empty);
