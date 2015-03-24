@@ -340,6 +340,8 @@ namespace IQM_TranslationTable
                     "{0} position input parsed:\n{1}\n\n", 
                     positionInput.NumItems, positionInput.input(inputRichTextBox.Text)));
 
+                // TODO: decide what to do with updating input pairs when load input button is clicked.
+                /* Took it out for now. Decide later what should be done with this
                 // Update all the input position to MeasurementDataGridView
                 foreach (Tuple<int, int> pair in positionInput.PairList)
                 {
@@ -347,7 +349,7 @@ namespace IQM_TranslationTable
                     DataGridViewRow row = MeasurementDataGridView.Rows[index];
                     row.Cells[0].Value = pair.Item1;
                     row.Cells[1].Value = pair.Item2;
-                }
+                }*/
             }
             catch (Exception ex)
             {

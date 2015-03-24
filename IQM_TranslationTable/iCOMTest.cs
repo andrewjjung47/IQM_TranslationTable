@@ -23,6 +23,7 @@ namespace IQM_TranslationTable
         //TODO: integreate iCOM module to the main UI and run it in background.
         //      only show details when the user wants it.
         //TODO: clean up iCOMTest.cs
+        //TODO: save the position file in excel sheet
 
         private IComVxListener icom;
         private IComMonitor monitor;
