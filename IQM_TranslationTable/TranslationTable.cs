@@ -138,13 +138,12 @@ namespace IQM_TranslationTable
 
         public void CSM()
         {
-            DialogResult result = DialogResult.No;
+            DialogResult useInput = DialogResult.No;
 
+            // If there are position pair inputs, ask the user for using them on CSM.
             if (form.positionInput.PairList.Count > 0)
             {
-                // TODO: message box for asking to use stored position pair, if ok, then use the stored
-                // position pair.
-                result = MessageBox.Show("Use stored position pairs for CSM?",
+                useInput = MessageBox.Show("Use stored position pairs for CSM?",
                     "Using Stored Position Pairs",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
@@ -152,10 +151,27 @@ namespace IQM_TranslationTable
 
             logger.Log("Start CSM");
 
-            motor1.Home();
-            motor2.Home();
+            // If homing is already done, ask the user if it should be done again or not.
+            if (motor1.IsReferenced() && motor2.IsReferenced())
+            {
+                DialogResult homeAgain = MessageBox.Show("Home again before CSM?",
+                    "Homing before CSM",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (homeAgain == DialogResult.Yes)
+                {
+                    motor1.Home();
+                    motor2.Home();
+                }
+            }
+            else
+            {
+                motor1.Home();
+                motor2.Home();
+            }
 
-            if (result == DialogResult.Yes)
+
+            if (useInput == DialogResult.Yes)
             {
                 while (form.positionInput.PairList.Count > 0)
                 {
