@@ -378,9 +378,14 @@ namespace IQM_TranslationTable
             else {
                 displayRichTextBox.AppendText("Remaining position pair queue:\n" + 
                     outputText + "\n\n");
-                DataGridViewRow row = MeasurementDataGridView.Rows[positionInput.NumItems
+                /*DataGridViewRow row = MeasurementDataGridView.Rows[positionInput.NumItems
                     - positionInput.PairList.Count - 1];
+                row.HeaderCell.Value = DateTime.Now.ToString("HH:mm:ss");*/
+                int index = MeasurementDataGridView.Rows.Add();
+                DataGridViewRow row = MeasurementDataGridView.Rows[index];
                 row.HeaderCell.Value = DateTime.Now.ToString("HH:mm:ss");
+                row.Cells[0].Value = CSM.motor1.CurrentRelPosition;
+                row.Cells[1].Value = CSM.motor2.CurrentRelPosition;
             }
         }
 
